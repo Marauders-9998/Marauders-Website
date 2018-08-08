@@ -13,6 +13,30 @@ def showFrontPage():
 
 @app.route('/projects')
 def showProjectsPage():
+	marauders_api = 'https://api.github.com/orgs/Marauders-9998/repos'
+	marauders_api_response = requests.get(marauders_api)
+	repos = []
+	if marauders_api_response.status_code == 200:
+		repositories = marauders_api_response.json()
+		for repository in repositories:
+			repo = {}
+			repo['id'] = repository['id']
+			repo['name'] = repository['name']
+			repo['url'] = repository['html_url']
+			repo['issues'] = repository['open_issues_count']
+			repo['forks'] = repository['forks_count']
+			repo['desc'] = repository['description']
+			repo['lang'] = repository['language']
+			repo['issues_api_url'] = repository['issues_url'].split('{')[0]
+			repo['commits_api_url'] = repository['commits_url'].split('{')[0] 
+			repos.append(repo)
+	else:
+		response = make_response(json.dumps('Could not request Github'), marauders_api_response.status_code)
+		response.headers['Content-Type'] = 'application/json'
+		return response
+
+	print(repos)
+
 	return render_template('projects_page.html')
 
 @app.route('/blog')
