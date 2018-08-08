@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+         <link rel="icon" href="{{ url_for('static', filename='favicon.png')}}"
+               type="image/gif">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css')}}">
+    </head>
+    
+    <body>
+		<div class="container">
+            <div id="top-bar">
+                <div>
+                </div>
+                <div>
+                </div>
+            </div>
+			{% block content %}
+			{% endblock %}
+		</div>
+    </body>
+    
+    <footer id="footer" class="footer section" name="footer">
+        <div id="footer-div">
+            <div class="widget-content">
+                <div>
+                    <a href="https://github.com/Marauders-9998/Marauders-Website">
+                        <img src="{{ url_for('static', filename='google-logo.png')}}"
+                             alt="Connect on Google"
+                             title="Connect on Google">
+                    </a>
+                    <a href="https://github.com/Marauders-9998/Marauders-Website">
+                        <img src="{{ url_for('static', filename='github-logo-white.png')}}"
+                             alt="Connect on Github"
+                             title="Connect on Github">
+                    </a>
+                    <a href="https://github.com/Marauders-9998/Marauders-Website">
+                        <img src="{{ url_for('static', filename='facebook-logo.png')}}"
+                             alt="Connect on Facebook"
+                             title="Connect on Facebook">
+                    </a>
+                </div>
+                
+                <div id="flask-powered-button">
+                    <a href="http://flask.pocoo.org/">
+                        <img src="http://flask.pocoo.org/static/badges/powered-by-flask-s.png"
+                             border="0"
+                             alt="powered by Flask"
+                             title="powered by Flask">
+                    </a>
+                </div>
+            </div>
+        </div>        
+    </footer>
+</html>

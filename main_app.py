@@ -11,6 +11,17 @@ def showFrontPage():
 	print("Hello World, from Maruaders")
 	return render_template('front_page.html')
 
+@app.route('/projects')
+def showProjectsPage():
+	return render_template('projects_page.html')
+
+@app.route('/blog')
+def showBlogPage():
+	return render_template('blog_page.html')
+
+@app.route('/forum')
+def showForumPafe():
+	return render_template('forum_page.html')
 
 if __name__ == '__main__':
   app.secret_key = 'super_secret_key'
