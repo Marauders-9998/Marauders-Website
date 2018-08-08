@@ -16,3 +16,14 @@ footer
 {
     padding-top: 5px;
 }
+.project-block
+{
+    background: #999999;
+    min-height: 40px;
+    padding: 20px 25px;
+    padding-bottom: 25px;
+    margin-bottom: 16px;
+    width: auto;
+    position: relative;
+    border: 0;
+}

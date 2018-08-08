@@ -1,4 +1,24 @@
 {% extends "main.html" %}
 {% block content %}
     Projects Page
+    {% for repo in repositories %}
+        <div id="{{repo.id}}" class='project-block'>
+            <div class='project-desc'>
+                <h3 class="project-name">
+                    <a href="{{repo.url}}">{{repo.name}}</a>
+                </h3>
+                <div class="project-description">
+                    {% if repo.description %}
+                        repo.description
+                    {% else %}
+                        No description Provided
+                    {% endif %}
+                </div>
+                <div class="project-stats">
+                </div>
+            </div>
+            <div class='project-buttons'>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

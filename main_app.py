@@ -37,7 +37,7 @@ def showProjectsPage():
 
 	print(repos)
 
-	return render_template('projects_page.html')
+	return render_template('projects_page.html', repositories = repos)
 
 @app.route('/blog')
 def showBlogPage():
