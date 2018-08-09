@@ -39,6 +39,15 @@ footer
 {
     background: #bfbfbf;
 }
+.project-link
+{   
+    text-decoration: none;
+    color: black;
+}
+.project-link:hover
+{
+    color: darkblue;
+}
 .project-desc
 {
     width: 75%;

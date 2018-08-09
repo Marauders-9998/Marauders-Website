@@ -1,12 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
     Projects Page
+    <div class='blocks-div'>
     {% for repo in repositories %}
-        <div class='blocks-div'>
         <div id="{{repo.id}}" class='project-block'>
             <div class='project-desc'>
                 <h3 class="project-name">
-                    <a href="{{repo.url}}">{{repo.name}}</a>
+                    <a href="{{repo.url}}" class="project-link">{{repo.name}}</a>
                 </h3>
                 <div class="project-description">
                     {% if repo.desc %}
@@ -39,6 +39,6 @@
                 </a>
             </div>
         </div>
-        </div>
     {% endfor %}
+    </div>
 {% endblock %}
