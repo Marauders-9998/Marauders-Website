@@ -9,10 +9,8 @@
                     <a href="{{repo.url}}">{{repo.name}}</a>
                 </h3>
                 <div class="project-description">
-                    {% if repo.description %}
-                        repo.description
-                    {% else %}
-                        No description Provided
+                    {% if repo.desc %}
+                        {{repo.desc}}
                     {% endif %}
                 </div>
                 <div class="project-stats">
