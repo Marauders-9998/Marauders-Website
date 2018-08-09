@@ -2,6 +2,7 @@
 {% block content %}
     Projects Page
     {% for repo in repositories %}
+        <div class='blocks-div'>
         <div id="{{repo.id}}" class='project-block'>
             <div class='project-desc'>
                 <h3 class="project-name">
@@ -39,6 +40,7 @@
                     Download
                 </a>
             </div>
+        </div>
         </div>
     {% endfor %}
 {% endblock %}

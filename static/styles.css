@@ -16,17 +16,28 @@ footer
 {
     padding-top: 5px;
 }
+.blocks-div
+{
+    width: 80%;
+    margin: auto;
+}
 .project-block
 {
+    transition: 1s;
     display: flex;
-    background: #999999;
+    background: #d9d9d9;
     min-height: 40px;
-    padding: 20px 25px;
+    padding: 10px 25px;
     padding-bottom: 25px;
     margin-bottom: 16px;
     width: auto;
     position: relative;
     border: 0;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+.project-block:hover
+{
+    background: #bfbfbf;
 }
 .project-desc
 {
