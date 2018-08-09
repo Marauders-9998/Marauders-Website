@@ -16,19 +16,20 @@ def showProjectsPage():
 	marauders_api = 'https://api.github.com/orgs/Marauders-9998/repos'
 	marauders_api_response = requests.get(marauders_api)
 	repos = []
-	if marauders_api_response.status_code == 200:
+	#For testing purposes
+	if True:#marauders_api_response.status_code == 200:
 		repositories = marauders_api_response.json()
 		for repository in repositories:
 			repo = {}
-			repo['id'] = repository['id']
-			repo['name'] = repository['name']
-			repo['url'] = repository['html_url']
-			repo['issues'] = repository['open_issues_count']
-			repo['forks'] = repository['forks_count']
-			repo['desc'] = repository['description']
-			repo['lang'] = repository['language']
-			repo['issues_api_url'] = repository['issues_url'].split('{')[0]
-			repo['commits_api_url'] = repository['commits_url'].split('{')[0] 
+			repo['id'] = 'abc'# repository['id']
+			repo['name'] = 'def'# repository['name']
+			repo['url'] = 'ghi'# repository['html_url']
+			repo['issues'] = 'jkl'# repository['open_issues_count']
+			repo['forks'] = 'mno'# repository['forks_count']
+			repo['desc'] = 'pqr'# repository['description']
+			repo['lang'] = 'stu'# repository['language']
+			repo['issues_api_url'] = 'vwx'# repository['issues_url'].split('{')[0]
+			repo['commits_api_url'] = 'yza'# repository['commits_url'].split('{')[0] 
 			repos.append(repo)
 	else:
 		response = make_response(json.dumps('Could not request Github'), marauders_api_response.status_code)
