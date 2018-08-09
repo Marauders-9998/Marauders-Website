@@ -8,16 +8,36 @@
     </head>
     
     <body>
-		<div class="container">
-            <div id="top-bar">
-                <div>
-                </div>
-                <div>
-                </div>
+        <div id="top-bar">
+            <div>
             </div>
+        </div>
+        <div class="website-header" id="main-header">
+            <div class="header-content">
+                {% block headertitle %}
+                {% endblock %}
+            </div>
+        </div>
+		<div class="container">
 			{% block content %}
 			{% endblock %}
 		</div>
+        <script>
+            window.onscroll = function() {myFunction()};
+            
+            var header = document.getElementById("main-header");
+            var sticky = header.offsetTop;
+            
+            function myFunction()
+            {
+                if (window.pageYOffset > sticky)
+                {   header.classList.add("sticky");
+                }
+                else
+                {   header.classList.remove("sticky");
+                }
+            }
+        </script>
     </body>
     
     <footer id="footer" class="footer section" name="footer">

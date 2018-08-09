@@ -4,8 +4,13 @@ footer
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #1a1a1a;
+    background-color: #333333;
     color: white;
+}
+body
+{
+    margin-bottom: 100px;
+    clear: both;
 }
 #footer-div
 {
@@ -42,11 +47,11 @@ footer
 .project-link
 {   
     text-decoration: none;
-    color: black;
+    color: #1a1a1a;
 }
 .project-link:hover
 {
-    color: darkblue;
+    color: #000000;
 }
 .project-desc
 {
@@ -55,5 +60,30 @@ footer
 .project-buttons
 {
     width: 25%;
-    padding-left: 20px;
+    margin-left: 30px;
+    display: block;
+}
+.website-header
+{
+    z-index: 1000;
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
+    text-align: center;
+}
+.container
+{
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .container {
+  padding-top: 102px;
 }

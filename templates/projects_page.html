@@ -1,7 +1,16 @@
 {% extends "main.html" %}
+
+{% block headertitle %}
+    <div class="header-title">
+        <h2>
+            Projects
+        </h2>
+    </div>
+{% endblock %}
+
 {% block content %}
-    Projects Page
     <div class='blocks-div'>
+    {% for x in range(10) %}
     {% for repo in repositories %}
         <div id="{{repo.id}}" class='project-block'>
             <div class='project-desc'>
@@ -17,28 +26,40 @@
                 </div>
             </div>
             <div class='project-buttons'>
-                <a class="github-button"
-                   href="https://github.com/Marauders-9998/{{repo.name}}/fork"
-                   data-icon="octicon-repo-forked" data-size="large"
-                   data-show-count="true"
-                   aria-label="Fork Marauders-9998/{{repo.name}} on GitHub">
-                    Fork
-                </a>
-                <a class="github-button"
-                   href="https://github.com/Marauders-9998/{{repo.name}}/issues"
-                   data-icon="octicon-issue-opened" data-size="large"
-                   data-show-count="true"
-                   aria-label="Issue Marauders-9998/{{repo.name}} on GitHub">
-                    Issue
-                </a>
-                <a class="github-button"
-                   href="https://github.com/Marauders-9998/{{repo.name}}/archive/master.zip"
-                   data-icon="octicon-cloud-download" data-size="large"
-                   aria-label="Download Marauders-9998/{{repo.name}} on GitHub">
-                    Download
-                </a>
+                <div>
+                    <a class="github-button"
+                       href="https://github.com/Marauders-9998/{{repo.name}}/fork"
+                       data-icon="octicon-repo-forked" data-size="large"
+                       data-show-count="true"
+                       aria-label="Fork Marauders-9998/{{repo.name}} on GitHub">
+                        Fork
+                    </a>
+                    <a class="github-button"
+                       href="https://github.com/Marauders-9998/{{repo.name}}/issues"
+                       data-icon="octicon-issue-opened" data-size="large"
+                       data-show-count="true"
+                       aria-label="Issue Marauders-9998/{{repo.name}} on GitHub">
+                        Issue
+                    </a>
+                </div>
+                <div>
+                    <a class="github-button"
+                       href="https://github.com/Marauders-9998/{{repo.name}}"
+                       data-icon="octicon-star" data-size="large"
+                       data-show-count="true"
+                       aria-label="Star Marauders-9998/{{repo.name}} on GitHub">
+                        Star
+                    </a>
+                    <a class="github-button"
+                       href="https://github.com/Marauders-9998/{{repo.name}}/archive/master.zip"
+                       data-icon="octicon-cloud-download" data-size="large"
+                       aria-label="Download Marauders-9998/{{repo.name}} on GitHub">
+                        Download
+                    </a>
+                </div>
             </div>
         </div>
+    {% endfor %}
     {% endfor %}
     </div>
 {% endblock %}
