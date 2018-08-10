@@ -9,6 +9,7 @@ footer
 }
 body
 {
+    background: #d9d9d9;
     margin-bottom: 100px;
     clear: both;
 }
@@ -28,9 +29,10 @@ body
 }
 .project-block
 {
+    border-radius: 10px;
     transition: 0.5s;
     display: flex;
-    background: #d9d9d9;
+    background: #f2f2f2;
     min-height: 40px;
     padding: 10px 25px;
     padding-bottom: 25px;
@@ -42,7 +44,7 @@ body
 }
 .project-block:hover
 {
-    background: #bfbfbf;
+    background: #b3b3b3;
 }
 .project-link
 {   
@@ -71,7 +73,7 @@ body
     background: url(header_background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    color: #f1f1f1;
+    color: white;
     min-height: 100px;
     
     display: flex;
