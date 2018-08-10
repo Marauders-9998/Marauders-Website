@@ -11,7 +11,7 @@ def showFrontPage():
 	print("Hello World, from Maruaders")
 	return render_template('front_page.html')
 
-@app.route('/projects')
+@app.route('/projects/')
 def showProjectsPage():
 	marauders_api = 'https://api.github.com/orgs/Marauders-9998/repos'
 	marauders_api_response = requests.get(marauders_api)
@@ -40,11 +40,11 @@ def showProjectsPage():
 
 	return render_template('projects_page.html', repositories = repos[::-1])
 
-@app.route('/blog')
+@app.route('/blogs/')
 def showBlogPage():
 	return render_template('blog_page.html')
 
-@app.route('/forum')
+@app.route('/forum/')
 def showForumPafe():
 	return render_template('forum_page.html')
 

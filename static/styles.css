@@ -65,10 +65,21 @@ body
 }
 .website-header
 {
+    left: 0;
     z-index: 1000;
     padding: 10px 16px;
-    background: #555;
+    background: url(header_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     color: #f1f1f1;
+    min-height: 100px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-content
+{
     text-align: center;
 }
 .container
