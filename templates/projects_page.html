@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class='blocks-div'>
+    <div class='blocks-div project-blocks-div'>
     {% for x in range(10) %}
     {% for repo in repositories %}
-        <div id="{{repo.id}}" class='project-block'>
+        <div id="{{repo.id}}" class='project-block repos-block'>
             <div class='project-desc'>
                 <h3 class="project-name">
                     <a href="{{repo.url}}" class="project-link">{{repo.name}}</a>

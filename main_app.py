@@ -7,6 +7,7 @@ import simplejson as json
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/home/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
 	return render_template('front_page.html')
