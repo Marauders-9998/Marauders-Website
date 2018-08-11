@@ -10,7 +10,6 @@
 
 {% block content %}
     <div class='blocks-div project-blocks-div'>
-    {% for x in range(10) %}
     {% for repo in repositories %}
         <div id="{{repo.id}}" class='project-block repos-block'>
             <div class='project-desc'>
@@ -59,7 +58,6 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
     {% endfor %}
     </div>
 {% endblock %}
