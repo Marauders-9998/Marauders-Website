@@ -17,11 +17,11 @@ def showProjectsPage():
 	marauders_api = 'https://api.github.com/orgs/Marauders-9998/repos'
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
 	marauders_api_response = requests.get(marauders_api, headers = headers)
-	print('---> marauders_api_response:', marauders_api_response)
+	#print('---> marauders_api_response:', marauders_api_response)
 	repos = []
 	if marauders_api_response.status_code == 200:
 		repositories = marauders_api_response.json()
-		print('---> repositories:', repositories)
+		#print('---> repositories:', repositories)
 		for repository in repositories:
 			repo = {}
 			repo['id'] = repository['id']
