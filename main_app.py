@@ -4,17 +4,22 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for, f
 import httplib2
 import simplejson as json
 
+organisation = 'Marauders-9998'
+
 app = Flask(__name__)
+
+def render_page(html_page, **kwargs):
+	return render_template(html_page, org = organisation, **kwargs)
 
 @app.route('/')
 @app.route('/home/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
-	return render_template('front_page.html')
+	return render_page('front_page.html')
 
 @app.route('/projects/')
 def showProjectsPage():
-	marauders_api = 'https://api.github.com/orgs/Marauders-9998/repos'
+	marauders_api = 'https://api.github.com/orgs/{org}/repos'.format(org = organisation)
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
 	marauders_api_response = requests.get(marauders_api, headers = headers)
 	#print('---> marauders_api_response:', marauders_api_response)
@@ -41,19 +46,19 @@ def showProjectsPage():
 
 	print(repos)
 
-	return render_template('projects_page.html', repositories = repos[::-1])
+	return render_page('projects_page.html', repositories = repos[::-1])
 
 @app.route('/blogs/')
 def showBlogPage():
-	return render_template('blog_page.html')
+	return render_page('blog_page.html')
 
 @app.route('/forum/')
 def showForumPage():
-	return render_template('forum_page.html')
+	return render_page('forum_page.html')
 
 @app.route('/new_blog/')
 def showNewBlogPage():
-	return render_template('new_blog_page.html')
+	return render_page('new_blog_page.html')
 
 if __name__ == '__main__':
   app.secret_key = 'super_secret_key'
