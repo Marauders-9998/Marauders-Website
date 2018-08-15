@@ -53,7 +53,8 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship(User)
 
-github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user)
+github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user, user_required = False) #in_production
+#github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user)
 ## ----------------------------------------------------------------------------------------------- ##
 
 
@@ -71,7 +72,7 @@ def render_page(html_page, **kwargs):
 	return render_template(html_page, org = organisation, **kwargs)
 
 @app.route('/')
-@app.route('/home/')
+#@app.route('/home/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
 	return render_page('front_page.html')
@@ -149,7 +150,7 @@ def github_login():
 	else:
 		account_info = github.get('/user')
 		if account_info.ok:
-			account_data = account_info.json()
+			account_info_json = account_info.json()
 			return '<h1>Your Github name is {}'.format(account_info_json['login'])
 		else:
 			return "Request Failed"
@@ -159,12 +160,12 @@ def github_login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('showFrontPage'))
 ## ----------------------------------------------------------------------------------------------- ##
 
 
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
 	app.debug = True
-	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##Remove this line <--------------------------------------
+	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
 	app.run(host = '0.0.0.0', port = 5000)
