@@ -3,6 +3,7 @@
 import httplib2
 import sys, os, requests
 import simplejson as json
+from pprint import pprint
 ## ----------------------------------------------------------------------------------------------- ##
 
 
@@ -26,7 +27,7 @@ from sqlalchemy.orm.exc import NoResultFound
 ## ----------------------------------------------------------------------------------------------- ##
 ## ----- Organisation to get github project from and github ids allowed for creating a blog ------ ##
 organisation = 'Marauders-9998'
-allowed_users_ids = []
+allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 
 
@@ -36,7 +37,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
 
 github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
-										client_secret = 'c9b6b6fd35c11df5b240af0cac4e15619a5b3b83')
+										client_secret = '4c6495c803f206e08a8ef8ef8068f417a3d322f0') #in_production
+#github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -72,10 +74,23 @@ def render_page(html_page, **kwargs):
 	return render_template(html_page, org = organisation, **kwargs)
 
 @app.route('/')
-#@app.route('/home/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
-	return render_page('front_page.html')
+	if loggedIn():
+		account_info = accountInfo(github)
+		if account_info is not None:
+			pprint(account_info)
+			user_image = account_info['avatar_url']
+			user_url = account_info['html_url']
+			if account_info['id'] in allowed_users_ids:
+				maraudersLogged = True
+			else:
+				maraudersLogged = False
+			return render_page('front_page_logged.html', usr_img = user_image, usr_url = user_url, maraudersLogged = maraudersLogged)
+		else:
+			return "Request Failed"
+	else:
+		return render_page('front_page_public.html')
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -118,40 +133,53 @@ def showForumPage():
 
 @app.route('/new_blog/')
 def showNewBlogPage():
-	return redirect(url_for('github_login'))
+	return render_page('new_blog_page.html')
 
 
 ## ----------------------------------------------------------------------------------------------- ##
 ## ----------------------------------------------------------------------------------------------- ##
+def loggedIn():
+	if not github.authorized:
+		return False
+	else:
+		return True
+
+def accountInfo(blueprint_session):
+	account_info = blueprint_session.get('/user')
+	if account_info.ok:
+		account_info_json = account_info.json()
+	else:
+		account_info_json = None
+	return account_info_json
+
 @oauth_authorized.connect_via(github_blueprint) ##Signal sent on log in
 def github_logged_in(blueprint, token):
+	account_info = accountInfo(blueprint.session)
 
-    account_info = blueprint.session.get('/user')
+	if account_info is not None:
+		username = account_info['login']
 
-    if account_info.ok:
-        account_info_json = account_info.json()
-        username = account_info_json['login']
+		query = User.query.filter_by(username = username)
 
-        query = User.query.filter_by(username = username)
+		try:
+			user = query.one()
+		except NoResultFound:
+			user = User(username = username)
+			db.session.add(user)
+			db.session.commit()
 
-        try:
-            user = query.one()
-        except NoResultFound:
-            user = User(username = username)
-            db.session.add(user)
-            db.session.commit()
+		login_user(user)
 
-        login_user(user)
 
 @app.route('/github/')
 def github_login():
-	if not github.authorized:
+	if not loggedIn():
 		return redirect(url_for("github.login"))
 	else:
-		account_info = github.get('/user')
-		if account_info.ok:
-			account_info_json = account_info.json()
-			return '<h1>Your Github name is {}'.format(account_info_json['login'])
+		account_info = accountInfo(github)
+		if account_info is not None:
+			pprint(account_info)
+			return url_for('showFrontPage')
 		else:
 			return "Request Failed"
 
@@ -165,6 +193,11 @@ def logout():
 
 
 if __name__ == '__main__':
+	if "--setup" in sys.argv:
+		with app.app_context():
+			db.create_all()
+			db.session.commit()
+			print("Database tables created")
 	app.secret_key = 'super_secret_key'
 	app.debug = True
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production

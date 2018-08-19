@@ -3,13 +3,27 @@
 	<head>
          <link rel="icon" href="{{ url_for('static', filename='favicon_32.png')}}"
                type="image/gif">
+        
+        <link href="{{ url_for('static', filename='assets/css/bootstrap.css')}}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='assets/css/font-awesome.css')}}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='bootstrap-social.css')}}" rel="stylesheet">
+        
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css')}}">
+        
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     
     <body>
         <div id="top-bar">
-            <div>
+            <div id="inner-top-bar">
+                <div id="top-bar-div">
+                    {% block top_bar_div %}
+                    {% endblock %}
+                </div>
+                <div id="top-bar-right">
+                    {% block top_bar_right %}
+                    {% endblock %}
+                </div>                
             </div>
         </div>
         <div class="website-header" id="main-header">

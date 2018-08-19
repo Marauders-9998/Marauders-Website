@@ -1,5 +1,14 @@
 {% extends "main.html" %}
 
+{% block top_bar_div %}
+{% endblock %}
+
+{% block top_bar_right %}
+<a href="{{usr_url}}">
+    <img src="{{usr_img}}" style="width:32px;height:32px;">
+</a>
+{% endblock %}
+
 {% block headertitle %}
     <div class="header-title">
         <h2>
@@ -13,24 +22,33 @@
 <div class="blocks-div home-blocks-div">
     <a href="/projects/" class="project-link">
         <div class="project-block home-page-block">
-            <h2>
+            <h3>
                 Projects
-            </h2>
+            </h3>
         </div>
     </a>
     <a href="/blogs/" class="project-link">
         <div class="project-block home-page-block">
-            <h2>
+            <h3>
                 Blog
-            </h2>
+            </h3>
         </div>
     </a>
     <a href="/forum/" class="project-link">
         <div class="project-block home-page-block">
-            <h2>
+            <h3>
                 Forum
-            </h2>
+            </h3>
         </div>
     </a>
+    {% if maraudersLogged %}
+    <a href="/new_blog/" class="project-link">
+        <div class="project-block home-page-block">
+            <h3>
+                Create a New Blog
+            </h3>
+        </div>
+    </a>
+    {% endif %}
 </div>
 {% endblock %}

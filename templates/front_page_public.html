@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block top_bar_div %}
+    Top bar div
+{% endblock %}
+
+{% block top_bar_right %}
+    <div id="github-signup_button">
+        <a class="btn btn-block btn-social btn-github"
+           href="/github">
+            <span class="fa fa-github"></span>
+            Sign in with GitHub
+        </a>
+    </div>
+{% endblock %}
+
+{% block headertitle %}
+    <div class="header-title">
+        <h2>
+            Marauders
+        </h2>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="blocks-div home-blocks-div">
+    <a href="/projects/" class="project-link">
+        <div class="project-block home-page-block">
+            <h3>
+                Projects
+            </h3>
+        </div>
+    </a>
+    <a href="/blogs/" class="project-link">
+        <div class="project-block home-page-block">
+            <h3>
+                Blog
+            </h3>
+        </div>
+    </a>
+    <a href="/forum/" class="project-link">
+        <div class="project-block home-page-block">
+            <h3>
+                Forum
+            </h3>
+        </div>
+    </a>
+</div>
+{% endblock %}
