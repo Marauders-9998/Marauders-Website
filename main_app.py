@@ -36,9 +36,9 @@ allowed_users_ids = [27439964, 31085591]
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
 
-#github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
-										#client_secret = '') #in_production
-github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
+github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
+										client_secret = 'dfcab08a4d6314d1890766e8b1c84284c7ad1f1f') #in_production
+#github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
 
