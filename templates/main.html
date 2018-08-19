@@ -14,18 +14,8 @@
     </head>
     
     <body>
-        <div id="top-bar">
-            <div id="inner-top-bar">
-                <div id="top-bar-div">
-                    {% block top_bar_div %}
-                    {% endblock %}
-                </div>
-                <div id="top-bar-right">
-                    {% block top_bar_right %}
-                    {% endblock %}
-                </div>                
-            </div>
-        </div>
+        {% block topbar %}
+        {% endblock %}
         <div class="website-header" id="main-header">
             <div class="header-content">
                 {% block headertitle %}

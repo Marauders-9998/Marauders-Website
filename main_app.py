@@ -36,9 +36,9 @@ allowed_users_ids = [27439964, 31085591]
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
 
-github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
-										client_secret = '4c6495c803f206e08a8ef8ef8068f417a3d322f0') #in_production
-#github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
+#github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
+										#client_secret = '') #in_production
+github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -71,24 +71,24 @@ def load_user(user_id):
 
 
 def render_page(html_page, **kwargs):
+	if loggedIn():
+		account_info = accountInfo(github)
+		if account_info is not None:
+			user_image = account_info['avatar_url']
+			user_url = account_info['html_url']
+			kwargs['usr_img'] = user_image
+			kwargs['usr_url'] = user_url
+			kwargs['maraudersLogged'] = maraudersLoggedIn()
+		else:
+			return "Request Failed"
+
 	return render_template(html_page, org = organisation, **kwargs)
 
 @app.route('/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
 	if loggedIn():
-		account_info = accountInfo(github)
-		if account_info is not None:
-			pprint(account_info)
-			user_image = account_info['avatar_url']
-			user_url = account_info['html_url']
-			if account_info['id'] in allowed_users_ids:
-				maraudersLogged = True
-			else:
-				maraudersLogged = False
-			return render_page('front_page_logged.html', usr_img = user_image, usr_url = user_url, maraudersLogged = maraudersLogged)
-		else:
-			return "Request Failed"
+		return render_page('front_page_logged.html')
 	else:
 		return render_page('front_page_public.html')
 
@@ -101,7 +101,6 @@ def showProjectsPage():
 	repos = []
 	if marauders_api_response.status_code == 200:
 		repositories = marauders_api_response.json()
-		#print('---> repositories:', repositories)
 		for repository in repositories:
 			repo = {}
 			repo['id'] = repository['id']
@@ -132,8 +131,14 @@ def showForumPage():
 	return render_page('forum_page.html')
 
 @app.route('/new_blog/')
+@login_required
 def showNewBlogPage():
-	return render_page('new_blog_page.html')
+	if maraudersLoggedIn():
+		return render_page('new_blog_page.html')
+	else:
+		response = make_response(render_page("Unauthorized.html"), 401)
+		response.headers['Content-Type'] = 'text/html'
+		return response
 
 
 ## ----------------------------------------------------------------------------------------------- ##
@@ -143,6 +148,20 @@ def loggedIn():
 		return False
 	else:
 		return True
+
+def maraudersLoggedIn():
+	if loggedIn():
+		account_info = accountInfo(github)
+		if account_info is not None:
+			if account_info['id'] in allowed_users_ids:
+				return True
+			else:
+				return False
+		else:
+			return False
+	else:
+		return False
+
 
 def accountInfo(blueprint_session):
 	account_info = blueprint_session.get('/user')

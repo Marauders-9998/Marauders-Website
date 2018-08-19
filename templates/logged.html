@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block topbar %}
+        <div id="top-bar">
+            <div id="inner-top-bar">
+                <div id="top-bar-div">
+                    top-bar-div
+                </div>
+                <div id="top-bar-right">
+                    <div id="user-image-div">
+                        <a href="{{usr_url}}">
+                            <img src="{{usr_img}}" style="width:32px;height:32px;">
+                        </a>
+                    </div>
+                </div>                
+            </div>
+        </div>
+{% endblock %}
