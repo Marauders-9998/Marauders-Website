@@ -209,7 +209,6 @@ def github_login():
 	else:
 		account_info = accountInfo(github)
 		if account_info is not None:
-			pprint(account_info)
 			return url_for('showFrontPage')
 		else:
 			return "Request Failed"

@@ -42,6 +42,13 @@ body
 {
     float: right;
 }
+#usr-btn
+{
+    padding: 0px;
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #444444;
+}
 .home-blocks-div
 {
     height: 33%;

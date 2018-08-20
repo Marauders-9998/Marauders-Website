@@ -1,18 +1,37 @@
 {% extends "main.html" %}
 
 {% block topbar %}
-        <div id="top-bar">
-            <div id="inner-top-bar">
-                <div id="top-bar-div">
-                    top-bar-div
+<div id="top-bar">
+    <div id="inner-top-bar">
+        <div id="top-bar-div">
+            top-bar-div
+        </div>
+        <div id="top-bar-right">
+            <div id="user-image-div">
+                <div class="dropdown">
+                    <button id="usr-btn"
+                            class="btn btn-default dropdown-toggle"
+                            type="button" id="menu1" data-toggle="dropdown">
+                        <img src="{{usr_img}}" style="width:48px;height:48px;">
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="user-dropdown-menu"
+                        class="dropdown-menu dropdown-menu-right"
+                        role="menu" aria-labelledby="menu1">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Menu item 1</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">Menu item 2</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="/github_logout">Logout</a>
+                        </li>
+                    </ul>
                 </div>
-                <div id="top-bar-right">
-                    <div id="user-image-div">
-                        <a href="{{usr_url}}">
-                            <img src="{{usr_img}}" style="width:32px;height:32px;">
-                        </a>
-                    </div>
-                </div>                
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}
