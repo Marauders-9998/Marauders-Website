@@ -37,7 +37,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
 
 github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
-										client_secret = 'dfcab08a4d6314d1890766e8b1c84284c7ad1f1f') #in_production
+										client_secret = '7e45895ce4523b893bfb4052f20901ecdfbfb17d') #in_production
 #github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
@@ -84,6 +84,7 @@ def render_page(html_page, **kwargs):
 
 	return render_template(html_page, org = organisation, **kwargs)
 
+
 @app.route('/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
@@ -91,6 +92,7 @@ def showFrontPage():
 		return render_page('front_page_logged.html')
 	else:
 		return render_page('front_page_public.html')
+
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -118,17 +120,27 @@ def showProjectsPage():
 		response.headers['Content-Type'] = 'application/json'
 		return response
 
-	print(repos)
+	pprint(repos)
 
-	return render_page('projects_page.html', repositories = repos[::-1])
+	if loggedIn():
+		return render_page('projects_page_logged.html', repositories = repos[::-1])
+	else:
+		return render_page('projects_page_public.html', repositories = repos[::-1])
+
 
 @app.route('/blogs/')
 def showBlogPage():
-	return render_page('blog_page.html')
+	if loggedIn():
+		return render_page('blog_page_logged.html')
+	else:
+		return render_page('blog_page_public.html')
+
 
 @app.route('/forum/')
+@login_required
 def showForumPage():
 	return render_page('forum_page.html')
+
 
 @app.route('/new_blog/')
 @login_required
