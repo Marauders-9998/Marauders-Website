@@ -78,6 +78,7 @@ def render_page(html_page, **kwargs):
 			user_url = account_info['html_url']
 			kwargs['usr_img'] = user_image
 			kwargs['usr_url'] = user_url
+			kwargs['userLogged'] = loggedIn()
 			kwargs['maraudersLogged'] = maraudersLoggedIn()
 		else:
 			return "Request Failed"
@@ -88,11 +89,8 @@ def render_page(html_page, **kwargs):
 @app.route('/')
 def showFrontPage():
 	print("Hello World, from Maruaders")
-	if loggedIn():
-		return render_page('front_page_logged.html')
-	else:
-		return render_page('front_page_public.html')
-
+	return render_page('front_page.html')
+	
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -122,18 +120,12 @@ def showProjectsPage():
 
 	pprint(repos)
 
-	if loggedIn():
-		return render_page('projects_page_logged.html', repositories = repos[::-1])
-	else:
-		return render_page('projects_page_public.html', repositories = repos[::-1])
+	return render_page('projects_page.html', repositories = repos[::-1])
 
 
 @app.route('/blogs/')
 def showBlogPage():
-	if loggedIn():
-		return render_page('blog_page_logged.html')
-	else:
-		return render_page('blog_page_public.html')
+	return render_page('blog_page.html')
 
 
 @app.route('/forum/')

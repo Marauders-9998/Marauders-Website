@@ -1,4 +1,8 @@
+{% if userLogged %}
 {% extends "logged.html" %}
+{% else %}
+{% extends "public.html" %}
+{% endif %}
 
 {% block headertitle %}
     <div class="header-title">

@@ -1,4 +1,8 @@
+{% if userLogged %}
+{% extends "logged.html" %}
+{% else %}
 {% extends "public.html" %}
+{% endif %}
 
 {% block headertitle %}
     <div class="header-title">
@@ -32,5 +36,14 @@
             </h3>
         </div>
     </a>
+    {% if maraudersLogged %}
+    <a href="/new_blog/" class="project-link">
+        <div class="project-block home-page-block">
+            <h3>
+                Create a New Blog
+            </h3>
+        </div>
+    </a>
+    {% endif %}
 </div>
 {% endblock %}
