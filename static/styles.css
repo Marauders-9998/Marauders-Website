@@ -101,7 +101,18 @@ body
 }
 .project-description
 {
-    padding-bottom: 20px;   
+    padding-bottom: 15px;   
+}
+.project-stats
+{
+    //display: flex;
+    padding-bottom: 8px;   
+}
+.language-dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
 }
 .project-buttons
 {

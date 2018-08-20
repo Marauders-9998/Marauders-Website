@@ -26,6 +26,11 @@
                     {% endif %}
                 </div>
                 <div class="project-stats">
+                    {% if repo.lang_color %}
+                    <span class="language-dot" 
+                          style="background-color: {{repo.lang_color}};"></span>
+                    {% endif %}
+                    {{repo.lang}}
                 </div>
             </div>
             <div class='project-buttons'>

@@ -26,7 +26,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 ## ----------------------------------------------------------------------------------------------- ##
 ## ----- Organisation to get github project from and github ids allowed for creating a blog ------ ##
-organisation = 'Marauders-9998'
+organisation = 'Maruaders-9998'
 allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -78,10 +78,12 @@ def render_page(html_page, **kwargs):
 			user_url = account_info['html_url']
 			kwargs['usr_img'] = user_image
 			kwargs['usr_url'] = user_url
-			kwargs['userLogged'] = loggedIn()
+			kwargs['userLogged'] = True
 			kwargs['maraudersLogged'] = maraudersLoggedIn()
 		else:
 			return "Request Failed"
+	else:
+		kwargs['userLogged'] = False
 
 	return render_template(html_page, org = organisation, **kwargs)
 
@@ -97,7 +99,8 @@ def showProjectsPage():
 	marauders_api = 'https://api.github.com/orgs/{org}/repos'.format(org = organisation)
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
 	marauders_api_response = requests.get(marauders_api, headers = headers)
-	#print('---> marauders_api_response:', marauders_api_response)
+	with open('colors.json') as f:
+		lang_info = json.load(f)
 	repos = []
 	if marauders_api_response.status_code == 200:
 		repositories = marauders_api_response.json()
@@ -110,6 +113,10 @@ def showProjectsPage():
 			repo['forks'] = repository['forks_count']
 			repo['desc'] = repository['description']
 			repo['lang'] = repository['language']
+			try:
+				repo['lang_color'] = lang_info[repo['lang']]['color']
+			except:
+				repo['lang_color'] = None
 			repo['issues_api_url'] = repository['issues_url'].split('{')[0]
 			repo['commits_api_url'] = repository['commits_url'].split('{')[0] 
 			repos.append(repo)
@@ -134,7 +141,7 @@ def showForumPage():
 	return render_page('forum_page.html')
 
 
-@app.route('/new_blog/')
+@app.route('/new_blog/', methods = ['GET', 'POST'])
 @login_required
 def showNewBlogPage():
 	if maraudersLoggedIn():
