@@ -26,7 +26,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 ## ----------------------------------------------------------------------------------------------- ##
 ## ----- Organisation to get github project from and github ids allowed for creating a blog ------ ##
-organisation = 'Maruaders-9998'
+organisation = 'Marauders-9998'
 allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -76,6 +76,8 @@ def render_page(html_page, **kwargs):
 	if loggedIn():
 		account_info = accountInfo(github)
 		if account_info is not None:
+			orgs_info = orgsAccountInfo(github, github_user = account_info['login'])
+			pprint(orgs_info)
 			user_image = account_info['avatar_url']
 			user_url = account_info['html_url']
 			kwargs['usr_img'] = user_image
@@ -98,16 +100,11 @@ def showFrontPage():
 
 @app.route('/projects/')
 def showProjectsPage():
-	marauders_api = 'https://api.github.com/orgs/{org}/repos?client_id={client_id}&client_secret={client_secret}'.format(org = organisation, 
-		client_id = client_id, client_secret = client_secret)
-	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
-	marauders_api_response = requests.get(marauders_api, headers = headers)
 	with open('colors.json') as f:
 		lang_info = json.load(f)
 	repos = []
-	if marauders_api_response.status_code == 200:
-		#repositories = [{'id':1, 'name':2, 'html_url':3, 'open_issues_count':5, 'forks_count':6, 'description':7}]
-		repositories = marauders_api_response.json()
+	repositories = orgReposInfo(github)
+	if repositories:
 		for repository in repositories:
 			repo = {}
 			repo['id'] = repository['id']
@@ -129,7 +126,7 @@ def showProjectsPage():
 		response.headers['Content-Type'] = 'application/json'
 		return response
 
-	pprint(repos)
+	#pprint(repos)
 
 	return render_page('projects_page.html', repositories = repos[::-1])
 
@@ -185,6 +182,26 @@ def accountInfo(blueprint_session):
 	else:
 		account_info_json = None
 	return account_info_json
+
+
+def orgsAccountInfo(blueprint_session, github_user):
+	orgs_info = blueprint_session.get('/users/{user}/orgs'.format(user = github_user))
+	if orgs_info.ok:
+		orgs_info_json = orgs_info.json()
+	else:
+		orgs_info_json = None
+	return orgs_info_json
+
+
+def orgReposInfo(blueprint_session):
+	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
+	repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation), headers = headers)
+	if repos_info.ok:
+		repos_info_json = repos_info.json()
+	else:
+		repos_info_json = None
+	return repos_info_json	
+
 
 @oauth_authorized.connect_via(github_blueprint) ##Signal sent on log in
 def github_logged_in(blueprint, token):

@@ -12,17 +12,17 @@
                     <button id="usr-btn"
                             class="btn btn-default dropdown-toggle"
                             type="button" id="menu1" data-toggle="dropdown">
-                        <img src="{{usr_img}}" style="width:48px;height:48px;">
+                        <img src="{{usr_img}}" id="usr-img" style="width:48px;height:48px;">
                         <span class="caret"></span>
                     </button>
                     <ul id="user-dropdown-menu"
                         class="dropdown-menu dropdown-menu-right"
                         role="menu" aria-labelledby="menu1">
                         <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="#">Menu item 1</a>
+                            <a role="menuitem" tabindex="-1" href="{{usr_url}}">Profile</a>
                         </li>
                         <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="#">Menu item 2</a>
+                            <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">My Repos</a>
                         </li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation">

@@ -45,9 +45,13 @@ body
 #usr-btn
 {
     padding: 0px;
-    color: #333;
-    background-color: #e6e6e6;
+    color: #ffffff;
+    background-color: #000000;
     border-color: #444444;
+}
+#usr-img
+{
+    
 }
 .home-blocks-div
 {
