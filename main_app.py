@@ -106,7 +106,7 @@ def showProjectsPage():
 		lang_info = json.load(f)
 	repos = []
 	if marauders_api_response.status_code == 200:
-		repositories = [{'id':1, 'name':2, 'html_url':3, 'open_issues_count':5, 'forks_count':6, 'description':7}]
+		#repositories = [{'id':1, 'name':2, 'html_url':3, 'open_issues_count':5, 'forks_count':6, 'description':7}]
 		repositories = marauders_api_response.json()
 		for repository in repositories:
 			repo = {}
