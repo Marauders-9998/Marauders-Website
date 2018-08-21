@@ -105,8 +105,11 @@ body
 }
 .project-stats
 {
-    //display: flex;
-    padding-bottom: 8px;   
+    //display: flex;   
+}
+.language-div
+{
+    padding-bottom: 8px;
 }
 .language-dot {
   height: 12px;

@@ -36,8 +36,10 @@ allowed_users_ids = [27439964, 31085591]
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
 
-github_blueprint = make_github_blueprint(client_id = '6fbf106b39b23aeeba15',
-										client_secret = '7e45895ce4523b893bfb4052f20901ecdfbfb17d') #in_production
+client_id = '6fbf106b39b23aeeba15'
+client_secret = '7e45895ce4523b893bfb4052f20901ecdfbfb17d'
+github_blueprint = make_github_blueprint(client_id = client_id,
+										client_secret = client_secret) #in_production
 #github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
@@ -96,13 +98,15 @@ def showFrontPage():
 
 @app.route('/projects/')
 def showProjectsPage():
-	marauders_api = 'https://api.github.com/orgs/{org}/repos'.format(org = organisation)
+	marauders_api = 'https://api.github.com/orgs/{org}/repos?client_id={client_id}&client_secret={client_secret}'.format(org = organisation, 
+		client_id = client_id, client_secret = client_secret)
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
 	marauders_api_response = requests.get(marauders_api, headers = headers)
 	with open('colors.json') as f:
 		lang_info = json.load(f)
 	repos = []
 	if marauders_api_response.status_code == 200:
+		repositories = [{'id':1, 'name':2, 'html_url':3, 'open_issues_count':5, 'forks_count':6, 'description':7}]
 		repositories = marauders_api_response.json()
 		for repository in repositories:
 			repo = {}
