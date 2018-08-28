@@ -8,7 +8,7 @@ cd Marauders-Website
 heroku create <heroku_app_name>
 nano Procfile
 ```
-Put this in Procfile
+Put this in Procfile and Save
 > web: python3 main_app.py
 ```
 python3 -m venv venv
