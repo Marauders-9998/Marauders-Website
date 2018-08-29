@@ -34,13 +34,15 @@ allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 ## --------------- Initialising the flask object and registering github blueprint ---------------- ##
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login_data.db'
+os.environ['MARAUDERS_LOGIN_DATA'] = 'sqlite:///login_data.db' ##in_production
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
-client_id = '6fbf106b39b23aeeba15'
-client_secret = '7e45895ce4523b893bfb4052f20901ecdfbfb17d'
+os.environ['MARAUDERS_GITHUB_SECRET'] = '6af656dd9f5120ea1da57712e75599abd9fc1234' ##in_production
+client_id = '6fbf106b39b23aeeba15' ##in_production
+#client_id = 'GITHUB_APP_CLIENT_ID'
+client_secret = os.environ.get('MARAUDERS_GITHUB_SECRET')
 github_blueprint = make_github_blueprint(client_id = client_id,
-										client_secret = client_secret) #in_production
-#github_blueprint = make_github_blueprint(client_id = 'GITHUB_APP_ID', client_secret = 'GITHUB_APP_SECRET')
+										client_secret = client_secret)
 app.register_blueprint(github_blueprint, url_prefix = '/github_login')
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -57,7 +59,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship(User)
 
-github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user, user_required = False) #in_production
+github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user, user_required = False) ##in_production
 #github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user)
 ## ----------------------------------------------------------------------------------------------- ##
 
@@ -122,7 +124,7 @@ def showProjectsPage():
 			repo['commits_api_url'] = repository['commits_url'].split('{')[0] 
 			repos.append(repo)
 	else:
-		response = make_response(json.dumps('Could not request Github'), marauders_api_response.status_code)
+		response = make_response(json.dumps('Could not request Github'), 503)
 		response.headers['Content-Type'] = 'application/json'
 		return response
 
@@ -195,7 +197,11 @@ def orgsAccountInfo(blueprint_session, github_user):
 
 def orgReposInfo(blueprint_session):
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
-	repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation), headers = headers)
+	'''repos_info = blueprint_session.get('/orgs/{org}/repos?client_id={}&client_secret={client_secret}'.format(org = organisation,
+		client_id = client_id,
+		client_secret = client_secret),
+	headers = headers)''' ##in_production
+	repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation))
 	if repos_info.ok:
 		repos_info_json = repos_info.json()
 	else:
@@ -248,7 +254,9 @@ if __name__ == '__main__':
 			db.create_all()
 			db.session.commit()
 			print("Database tables created")
-	app.secret_key = 'super_secret_key'
+	os.environ['MARAUDERS_SECRET_KEY'] = 'super_secret_key' ##in_production
+	os.environ['MARAUDERS_DATABASE_URL'] = 'www.google.com' ##in_production
+	app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
 	app.debug = True
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
 	app.run(host = '0.0.0.0', port = 5000)

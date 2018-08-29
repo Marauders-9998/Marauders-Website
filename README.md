@@ -19,4 +19,6 @@ pip3 freeze > requirements.txt
 git add -A
 git commit -m "Changes"
 git push heroku master
+heroku ps:scale web=1
+heroku open
 ```
