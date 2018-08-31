@@ -79,12 +79,12 @@ def render_page(html_page, **kwargs):
 		account_info = accountInfo(github)
 		if account_info is not None:
 			orgs_info = orgsAccountInfo(github, github_user = account_info['login'])
-			pprint(orgs_info)
 			user_image = account_info['avatar_url']
 			user_url = account_info['html_url']
 			kwargs['usr_img'] = user_image
 			kwargs['usr_url'] = user_url
 			kwargs['userLogged'] = True
+			kwargs['orgs_info'] = orgs_info
 			kwargs['maraudersLogged'] = maraudersLoggedIn()
 		else:
 			return "Request Failed"

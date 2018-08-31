@@ -8,7 +8,7 @@
         </div>
         <div id="top-bar-right">
             <div id="user-image-div">
-                <div class="dropdown">
+                <div class="dropdown usr-dropdown">
                     <button id="usr-btn"
                             class="btn btn-default dropdown-toggle"
                             type="button" id="menu1" data-toggle="dropdown">
@@ -18,13 +18,33 @@
                     <ul id="user-dropdown-menu"
                         class="dropdown-menu dropdown-menu-right"
                         role="menu" aria-labelledby="menu1">
+                        
+                        {% if orgs_info %}
+                        
+                        {% for org in orgs_info %}
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="https://github.com/{{org.login}}">
+                                <img src="{{org.avatar_url}}"
+                                     class="org-img"
+                                     style="width: 15px;
+                                            height: 15px">
+                                {{org.login}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                        
+                        <li role="presentation" class="divider"></li>
+                        {% endif %}                        
+                        
                         <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{usr_url}}">Profile</a>
                         </li>
                         <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">My Repos</a>
                         </li>
+                        
                         <li role="presentation" class="divider"></li>
+                        
                         <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="/github_logout">Logout</a>
                         </li>

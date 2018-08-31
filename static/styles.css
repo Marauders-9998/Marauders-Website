@@ -49,9 +49,17 @@ body
     background-color: #000000;
     border-color: #444444;
 }
-#usr-img
+.usr-dropdown
 {
-    
+    transition: 0.5s;
+}
+.usr-dropdown:hover > .dropdown-menu
+{
+    display: block;
+}
+.org-img
+{
+    border-radius: 50%;
 }
 .home-blocks-div
 {
