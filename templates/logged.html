@@ -1,56 +1,49 @@
 {% extends "main.html" %}
 
-{% block topbar %}
-<div id="top-bar">
-    <div id="inner-top-bar">
-        <div id="top-bar-div">
-            top-bar-div
-        </div>
-        <div id="top-bar-right">
-            <div id="user-image-div">
-                <div class="dropdown usr-dropdown">
-                    <button id="usr-btn"
-                            class="btn btn-default dropdown-toggle"
-                            type="button" id="menu1" data-toggle="dropdown">
-                        <img src="{{usr_img}}" id="usr-img" style="width:48px;height:48px;">
-                        <span class="caret"></span>
-                    </button>
-                    <ul id="user-dropdown-menu"
-                        class="dropdown-menu dropdown-menu-right"
-                        role="menu" aria-labelledby="menu1">
+{% block topbar_right %}
+<div id="top-bar-right">
+    <div id="user-image-div">
+        <div class="dropdown usr-dropdown">
+            <button id="usr-btn"
+                    class="btn btn-default dropdown-toggle"
+                    type="button" id="menu1" data-toggle="dropdown">
+                <img src="{{usr_img}}" id="usr-img" style="width:32px;height:32px;">
+                <span class="caret"></span>
+            </button>
+            <ul id="user-dropdown-menu"
+                class="dropdown-menu dropdown-menu-right"
+                role="menu" aria-labelledby="menu1">
+                    
+                {% if orgs_info %}
+                    
+                {% for org in orgs_info %}
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" ref="https://github.com/{{org.login}}">
+                    <img src="{{org.avatar_url}}"
+                         class="org-img"
+                         style="width: 15px;
+                                height: 15px">
+                    {{org.login}}
+                    </a>
+                </li>
+                {% endfor %}
+                    
+                <li role="presentation" class="divider"></li>
+                {% endif %}                        
+                    
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="{{usr_url}}">Profile</a>
+                </li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">My Repos</a>
+                </li>
                         
-                        {% if orgs_info %}
+                <li role="presentation" class="divider"></li>
                         
-                        {% for org in orgs_info %}
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="https://github.com/{{org.login}}">
-                                <img src="{{org.avatar_url}}"
-                                     class="org-img"
-                                     style="width: 15px;
-                                            height: 15px">
-                                {{org.login}}
-                            </a>
-                        </li>
-                        {% endfor %}
-                        
-                        <li role="presentation" class="divider"></li>
-                        {% endif %}                        
-                        
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="{{usr_url}}">Profile</a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">My Repos</a>
-                        </li>
-                        
-                        <li role="presentation" class="divider"></li>
-                        
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="/github_logout">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="/github_logout">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

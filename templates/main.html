@@ -17,8 +17,22 @@
     </head>
     
     <body>
-        {% block topbar %}
-        {% endblock %}
+        <div id="top-bar">
+            <div id="inner-top-bar">
+                <div id="top-bar-div">
+                    <div id="marauders-logo">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='favicon_32.png')}}"
+                                 id="org-logo"
+                                 style="width: 32px;
+                                        height: 32px">
+                        </a>
+                    </div>
+                </div>
+                {% block topbar_right %}
+                {% endblock %}
+            </div>
+        </div>
         <div class="website-header" id="main-header">
             <div class="header-content">
                 {% block headertitle %}
@@ -47,7 +61,7 @@
         </script>
     </body>
     
-    <footer id="footer" class="footer section" name="footer">
+    <footer id="footer" class="footer" name="footer">
         <div id="footer-div">
             <div class="widget-content">
                 <div>

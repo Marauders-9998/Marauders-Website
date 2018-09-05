@@ -1,9 +1,12 @@
+html, body
+{
+    height: 100%;
+}
 footer
 {
     left: 0;
     bottom: 0;
     width: 100%;
-    background: #dedede;
     color: white;
 }
 body
@@ -22,29 +25,33 @@ body
 }
 #inner-top-bar
 {
-    background: #AAAAAA;
+    padding: 10px 120px 10px 120px;
+    background: #24292E;
     display: flex;
 }
 #top-bar-div
 {
-    background: #FF0000;
-    width: 75%;
+    width: 80%;
 }
 #top-bar-right
 {
-    background: #000000;
-    width: 25%;
+    width: 20%;
 }
 #user-image-div
 {
     float: right;
 }
+#usr-img,
+#org-logo
+{
+    border-radius: 10%;
+}
 #usr-btn
 {
     padding: 0px;
     color: #ffffff;
-    background-color: #000000;
-    border-color: #444444;
+    background-color: #24292E;
+    border-color: #24292E;
 }
 .usr-dropdown
 {
