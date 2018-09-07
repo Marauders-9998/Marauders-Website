@@ -98,6 +98,9 @@ body
 .project-block:hover
 {
     background: #d5d5d5;
+}
+.home-page-block:hover
+{
     transform: scale(1.02);
 }
 .home-two-block-div
@@ -114,6 +117,12 @@ body
     position: relative;
     text-align: center;
 }
+.home-block-icon
+{
+    height: 150px;
+    width: 150px;
+    margin-top: 30px;
+}
 .repos-block
 {
     display: flex;
@@ -126,6 +135,10 @@ body
 .project-link:hover
 {
     color: #000000;
+}
+.homepage-link:hover
+{
+    text-decoration: none;
 }
 .project-desc
 {
@@ -189,4 +202,33 @@ body
 /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
 .sticky + .container {
   padding-top: 102px;
+}
+
+/*For mid screen size*/
+@media (min-width:451px) and (max-width: 820px)
+{
+    .home-page-block
+    {
+        min-height: 20px;
+        width: auto;
+        margin-bottom: 16px;
+        position: relative;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+/*For mobile screens*/
+@media(max-width: 450px)
+{
+    .home-page-block
+    {
+        min-height: 20px;
+        width: 100%;
+        margin-bottom: 16px;
+        position: relative;
+    }
+    .home-block-icon
+    {
+        display: none;
+    }
 }

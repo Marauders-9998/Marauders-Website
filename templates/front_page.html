@@ -17,33 +17,41 @@
 <div class="blocks-div home-blocks-div">
     <div class="home-two-block-div">
         <div class="home-page-block">
-            <a href="/projects/" class="project-link">
+            <a href="/projects/" class="project-link homepage-link">
                 <h3>
                     Projects
                 </h3>
+                <img src="{{ url_for('static', filename='flask-logo.png')}}"
+                     class="home-block-icon">
             </a>
         </div>
         
         <div class="home-page-block">
-            <a href="http://marauders9998.blogspot.com/" class="project-link">
+            <a href="http://marauders9998.blogspot.com/" class="project-link homepage-link">
                 <h3>
                     Blog
                 </h3>
+                <img src="{{ url_for('static', filename='flask-logo.png')}}"
+                     class="home-block-icon">
             </a>
         </div>
         <div class="home-page-block">
-            <a href="/forum/" class="project-link">
+            <a href="/forum/" class="project-link homepage-link">
                 <h3>
                     Forum
                 </h3>
+                <img src="{{ url_for('static', filename='flask-logo.png')}}"
+                     class="home-block-icon">
             </a>
         </div>
         {% if maraudersLogged %}
         <div class="home-page-block">
-            <a href="/new_blog/" class="project-link">
+            <a href="/new_blog/" class="project-link homepage-link">
                 <h3>
-                    Create a New Blog
+                    Create Blog
                 </h3>
+                <img src="{{ url_for('static', filename='flask-logo.png')}}"
+                     class="home-block-icon">
             </a>
         </div>
         {% endif %}

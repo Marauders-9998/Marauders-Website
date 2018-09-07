@@ -37,7 +37,7 @@ app = Flask(__name__)
 os.environ['MARAUDERS_LOGIN_DATA'] = 'sqlite:///login_data.db' ##in_production
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
-os.environ['MARAUDERS_GITHUB_SECRET'] = 'ef1d4f090953efbdc3e2702c715a859078719732' ##in_production
+os.environ['MARAUDERS_GITHUB_SECRET'] = 'bae247fbe4a58ff0e6dd61ba32bf421780dff3e1' ##in_production
 client_id = '6fbf106b39b23aeeba15' ##in_production
 #client_id = 'GITHUB_APP_CLIENT_ID'
 client_secret = os.environ.get('MARAUDERS_GITHUB_SECRET')
