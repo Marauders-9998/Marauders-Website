@@ -77,25 +77,41 @@ body
 {
     margin: auto;
 }
+.home-page-block,
 .project-block
 {
     border-radius: 10px;
     transition: 0.75s;
     background: #ffffff;
-    min-height: 40px;
     padding: 10px 25px;
-    margin-bottom: 16px;
-    width: auto;
-    position: relative;
     border: 0;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
+.project-block
+{
+    min-height: 40px;
+    width: auto;
+    margin-bottom: 16px;
+    position: relative;
+}
+.home-page-block:hover,
 .project-block:hover
 {
     background: #d5d5d5;
+    transform: scale(1.02);
+}
+.home-two-block-div
+{
+    display: flex;
+    margin-bottom: 16px;
+    flex-flow: row wrap;
+    justify-content: space-around;
 }
 .home-page-block
 {
+    min-height: 320px;
+    width: 22%;
+    position: relative;
     text-align: center;
 }
 .repos-block
