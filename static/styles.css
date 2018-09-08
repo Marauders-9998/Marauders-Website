@@ -132,6 +132,11 @@ body
 .project-link
 {   
     text-decoration: none;
+    outline: none;
+    color: #1a1a1a;
+}
+.project-link:visited
+{
     color: #1a1a1a;
 }
 .project-link:hover
