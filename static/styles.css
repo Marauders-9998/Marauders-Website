@@ -11,7 +11,7 @@ footer
 }
 body
 {
-    background: #eeeeee;
+    background: #f0f0f0;
     clear: both;
 }
 #footer-div
@@ -31,6 +31,7 @@ body
 }
 #top-bar-div
 {
+    display: flex;
     width: 80%;
 }
 #top-bar-right
@@ -169,11 +170,17 @@ body
     margin-left: 30px;
     display: block;
 }
+#top-bar-div-content
+{
+    text-align: center;
+    color: white;
+}
 .website-header
 {
     left: 0;
     z-index: 1000;
     padding: 10px 16px;
+    //background: #24292E;
     background: url(header_background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
