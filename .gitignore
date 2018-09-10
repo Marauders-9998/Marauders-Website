@@ -108,5 +108,9 @@ Vagrantfile
 .vagrant/
 .vagrant
 
+# Pycharm Stuff
+.idea
+.idea/
+
 login_data.db
 Procfile
