@@ -37,7 +37,7 @@ app = Flask(__name__)
 os.environ['MARAUDERS_LOGIN_DATA'] = 'sqlite:///login_data.db' ##in_production
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
-os.environ['MARAUDERS_GITHUB_SECRET'] = '8bcdef6158947aa30f30955ee33a494ce5878850' ##in_production
+os.environ['MARAUDERS_GITHUB_SECRET'] = '38b5686225eb10c32632e92dc6fc953047e3eec4' ##in_production
 client_id = '6fbf106b39b23aeeba15' ##in_production
 #client_id = 'GITHUB_APP_CLIENT_ID'
 client_secret = os.environ.get('MARAUDERS_GITHUB_SECRET')
@@ -98,7 +98,45 @@ def render_page(html_page, **kwargs):
 def showFrontPage():
 	print("Hello World, from Maruaders")
 	return render_page('front_page.html')
-	
+
+@app.route('/<auth_token>', subdomain = "api")
+@app.route('/', subdomain = "api")
+def apiFrontPage(auth_token = None):
+	if loggedIn() or validAccessToken(auth_token):
+		homePageJSON = {
+		"api": 
+		{
+			"api_url": "http://api.marauders.com:5000",
+			"blogs_url": "http://api.marauders.com:5000/blogs",
+			"forum_url": "http://api.marauders.com:5000/forum",
+			"projects_url": "http://api.marauders.com:5000/projects",
+		},
+		"html":
+		{
+			"html_url": "http://marauders.com:5000",
+			"blogs_html_url": "https://marauders9998.blogspot.com",
+			"forum_html_url": "http://marauders.com:5000/forum",
+			"projects_html_url": "http://marauders.com:5000/projects"
+		}}
+		response = make_response(jsonify(homePageJSON), 200)
+	else:
+		homePageUnauth = {
+		"message": "Unauthorized",
+		"access":
+		{
+			"marauders_login_url": "http://marauders.com:5000/github",
+			"api_url": "http://api.marauders.com{/access_token}"
+		}}
+		response = make_response(jsonify(homePageUnauth), 401)
+
+	response.headers['Content-Type'] = 'application/json'
+	return response
+
+def validAccessToken(auth_token):
+	if not auth_token:
+		return False
+	else:
+		return True
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -257,6 +295,8 @@ if __name__ == '__main__':
 	os.environ['MARAUDERS_SECRET_KEY'] = 'super_secret_key' ##in_production
 	os.environ['MARAUDERS_DATABASE_URL'] = 'www.google.com' ##in_production
 	app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
+	app.config['SERVER_NAME'] = 'marauders.com:5000'
+	app.config['JSON_SORT_KEYS'] = False
 	app.debug = True
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
 	app.run(host = '0.0.0.0', port = 5000)
