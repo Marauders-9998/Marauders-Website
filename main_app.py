@@ -120,14 +120,14 @@ def apiFrontPage(auth_token = None):
 		}}
 		response = make_response(jsonify(homePageJSON), 200)
 	else:
-		homePageUnauth = {
+		UnauthAPI = {
 		"message": "Unauthorized",
 		"access":
 		{
 			"marauders_login_url": "http://marauders.com:5000/github",
 			"api_url": "http://api.marauders.com{/access_token}"
 		}}
-		response = make_response(jsonify(homePageUnauth), 401)
+		response = make_response(jsonify(UnauthAPI), 401)
 
 	response.headers['Server'] = app.config['SERVER_NAME']
 	response.headers['Content-Type'] = 'application/json'
@@ -140,11 +140,12 @@ def apiFrontPage(auth_token = None):
 def validAccessToken(auth_token):
 	if not auth_token:
 		#Code to check for the validation token
-		#if Valid Access token, update the necessary information for
-		#limiting the api hits per user
 		return False
 	else:
 		return True
+
+def projectDetails():
+	pass
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -178,6 +179,35 @@ def showProjectsPage():
 	#pprint(repos)
 
 	return render_page('projects_page.html', repositories = repos[::-1])
+
+
+@app.route('/projects/<auth_token>', subdomain = "api")
+@app.route('/projects/', subdomain = "api")
+def apiProjectsPage(auth_token = None):
+	if loggedIn() or validAccessToken(auth_token):		
+		#Code to update the necessary information for limiting the api hits per user
+		projectsJSON = {
+
+			"projects": orgReposInfo(github)
+		}
+		response = make_response(jsonify(projectsJSON), 200)
+	else:
+		UnauthAPI = {
+		"message": "Unauthorized",
+		"access":
+		{
+			"marauders_login_url": "http://marauders.com:5000/github",
+			"api_url": "http://api.marauders.com{/access_token}"
+		}}
+		response = make_response(jsonify(UnauthAPI), 401)
+
+	response.headers['Server'] = app.config['SERVER_NAME']
+	response.headers['Content-Type'] = 'application/json'
+	#Number of api hits allowed per user per specified time
+	response.headers['X-RateLimit-Limit'] = '60'
+	#Show the allowed number of api hits for the user for the current time interval
+	response.headers['X-RateLimit-Remaining'] = '60' ##in_production
+	return response
 
 
 @app.route('/blogs/')
