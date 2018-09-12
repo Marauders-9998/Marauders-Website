@@ -143,9 +143,7 @@ def validAccessToken(auth_token):
 		return False
 	else:
 		return True
-
-def projectDetails():
-	pass
+		
 
 @app.route('/projects/')
 def showProjectsPage():
