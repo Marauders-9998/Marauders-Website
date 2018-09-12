@@ -129,11 +129,19 @@ def apiFrontPage(auth_token = None):
 		}}
 		response = make_response(jsonify(homePageUnauth), 401)
 
+	response.headers['Server'] = app.config['SERVER_NAME']
 	response.headers['Content-Type'] = 'application/json'
+	#Number of api hits allowed per user per specified time
+	response.headers['X-RateLimit-Limit'] = '60'
+	#Show the allowed number of api hits for the user for the current time interval
+	response.headers['X-RateLimit-Remaining'] = '60' ##in_production
 	return response
 
 def validAccessToken(auth_token):
 	if not auth_token:
+		#Code to check for the validation token
+		#if Valid Access token, update the necessary information for
+		#limiting the api hits per user
 		return False
 	else:
 		return True
@@ -164,6 +172,7 @@ def showProjectsPage():
 	else:
 		response = make_response(json.dumps('Could not request Github'), 503)
 		response.headers['Content-Type'] = 'application/json'
+		response.headers['Server'] = app.config['SERVER_NAME']
 		return response
 
 	#pprint(repos)
@@ -200,6 +209,7 @@ def loggedIn():
 		return False
 	else:
 		return True
+		
 
 def maraudersLoggedIn():
 	if loggedIn():
@@ -295,7 +305,7 @@ if __name__ == '__main__':
 	os.environ['MARAUDERS_SECRET_KEY'] = 'super_secret_key' ##in_production
 	os.environ['MARAUDERS_DATABASE_URL'] = 'www.google.com' ##in_production
 	app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
-	app.config['SERVER_NAME'] = 'marauders.com:5000'
+	app.config['SERVER_NAME'] = 'marauders.com:5000' ##in_production
 	app.config['JSON_SORT_KEYS'] = False
 	app.debug = True
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
