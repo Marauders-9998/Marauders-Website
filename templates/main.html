@@ -19,7 +19,7 @@
     <body>
         <div id="top-bar">
             <div id="inner-top-bar">
-                <div id="top-bar-div">
+                <div id="top-bar-left">
                     <div id="marauders-logo">
                         <a href="/">
                             <img src="{{ url_for('static', filename='favicon_32.png')}}"
@@ -28,7 +28,10 @@
                                         height: 32px">
                         </a>
                     </div>
-                    <div id="top-bar-div-content">
+                </div>
+                <div id="top-bar-div">
+                    <div id="top-header-txt">
+                        Marauders
                     </div>
                 </div>
                 {% block topbar_right %}

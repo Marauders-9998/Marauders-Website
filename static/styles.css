@@ -29,10 +29,24 @@ body
     background: #24292E;
     display: flex;
 }
+#top-bar-left
+{
+    display: flex;
+    width: 20%;
+}
 #top-bar-div
 {
     display: flex;
-    width: 80%;
+    width: 60%;
+}
+#top-header-txt
+{
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    display: none;
 }
 #top-bar-right
 {
@@ -131,7 +145,7 @@ body
 .hover-text
 {
   border-radius: 5%;
-  background-color: #14191E;
+  background-color: #101010;
   color: white;
   font-size: 16px;
   font-weight: 900;
@@ -212,11 +226,6 @@ body
     margin-left: 30px;
     display: block;
 }
-#top-bar-div-content
-{
-    text-align: center;
-    color: white;
-}
 .website-header
 {
     left: 0;
@@ -269,8 +278,72 @@ body
     }
 }
 /*For mobile screens*/
-@media(max-width: 450px)
+@media (min-width: 221px) and (max-width: 450px),
+    (max-height: 350px) and (max-width: 500px)
 {
+    #main-header
+    {
+        display: none
+    }
+    #top-header-txt
+    {
+        display: flex;
+    }
+    #inner-top-bar
+    {
+        padding: 10px 60px 10px 60px;
+    }
+    .mobile-txt
+    {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        display: block;
+        font-weight: bold;
+        font-size: 22px;
+    }
+    .home-blocks-div
+    {
+        display: block;
+    }
+    .home-two-block-div
+    {
+        display: block;
+        width: 100%;
+    }
+    .home-page-block
+    {
+        min-height: 20px;
+        width: 100%;
+        margin-bottom: 16px;
+        position: relative;
+    }
+    .block-img
+    {
+        display: none;
+    }
+    .homepage-link
+    {
+        display: none;
+    }
+    .home-page-block:hover .middle-block
+    {
+        display: none;
+    }
+}
+@media (max-width: 220px)
+{
+    #main-header
+    {
+        display: none
+    }
+    #top-header-txt
+    {
+        display: flex;
+    }
+    #inner-top-bar
+    {
+        padding: 10px 20px 10px 20px;
+    }
     .mobile-txt
     {
         padding-top: 10px;
