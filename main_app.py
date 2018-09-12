@@ -93,6 +93,9 @@ def render_page(html_page, **kwargs):
 
 	return render_template(html_page, org = organisation, **kwargs)
 
+def updateLimiting(auth_token):
+	#Code to update the necessary information for limiting the api hits per user
+	pass
 
 @app.route('/')
 def showFrontPage():
@@ -103,6 +106,7 @@ def showFrontPage():
 @app.route('/', subdomain = "api")
 def apiFrontPage(auth_token = None):
 	if loggedIn() or validAccessToken(auth_token):
+		updateLimiting(auth_token)
 		homePageJSON = {
 		"api": 
 		{
@@ -143,7 +147,7 @@ def validAccessToken(auth_token):
 		return False
 	else:
 		return True
-		
+
 
 @app.route('/projects/')
 def showProjectsPage():
@@ -183,7 +187,7 @@ def showProjectsPage():
 @app.route('/projects/', subdomain = "api")
 def apiProjectsPage(auth_token = None):
 	if loggedIn() or validAccessToken(auth_token):		
-		#Code to update the necessary information for limiting the api hits per user
+		updateLimiting(auth_token)
 		projectsJSON = {
 
 			"projects": orgReposInfo(github)
