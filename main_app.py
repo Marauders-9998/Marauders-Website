@@ -79,8 +79,10 @@ def render_page(html_page, **kwargs):
 		account_info = accountInfo(github)
 		if account_info is not None:
 			orgs_info = orgsAccountInfo(github, github_user = account_info['login'])
+			user_name = account_info['login']
 			user_image = account_info['avatar_url']
 			user_url = account_info['html_url']
+			kwargs['usr_name'] = user_name
 			kwargs['usr_img'] = user_image
 			kwargs['usr_url'] = user_url
 			kwargs['userLogged'] = True

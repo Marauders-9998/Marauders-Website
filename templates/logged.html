@@ -13,7 +13,16 @@
             <ul id="user-dropdown-menu"
                 class="dropdown-menu dropdown-menu-right"
                 role="menu" aria-labelledby="menu1">
-                    
+                   
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1"
+                       href="{{usr_url}}">
+                        Signed in as <b>{{usr_name}}</b>
+                    </a>
+                </li>
+                
+                <li role="presentation" class="divider"></li>
+                
                 {% if orgs_info %}
                     
                 {% for org in orgs_info %}
@@ -31,8 +40,6 @@
                 <li role="presentation" class="divider"></li>
                 {% endif %}                        
                     
-                <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="{{usr_url}}">Profile</a>
                 </li>
                 <li role="presentation">
                     <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">
