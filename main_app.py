@@ -214,6 +214,27 @@ def apiProjectsPage(auth_token = None):
 def showBlogPage():
 	return render_page('blog_page.html')
 
+@app.route('/blogs/<auth_token>', subdomain = "api")
+@app.route('/blogs/', subdomain = "api")
+def apiBlogsPage(auth_token = None):
+	if loggedIn() or validAccessToken(auth_token):
+		blogsJSON = {
+		}
+		response = make_response(jsonify(blogsJSON), 200)
+	else:
+		UnauthAPI = {
+		"message": "Unauthorized",
+		"access":
+		{
+			"marauders_login_url": "http://marauders.com:5000/github",
+			"api_url": "http://api.marauders.com{/access_token}"
+		}}
+		response = make_response(jsonify(UnauthAPI), 401)
+
+	response.headers['Server'] = app.config['SERVER_NAME']
+	response.headers['Content-Type'] = 'application/json'
+	return response
+
 
 @app.route('/forum/')
 @login_required

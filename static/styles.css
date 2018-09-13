@@ -291,7 +291,7 @@ body
     }
     #inner-top-bar
     {
-        padding: 10px 60px 10px 60px;
+        padding: 10px 40px 10px 40px;
     }
     .mobile-txt
     {
@@ -329,7 +329,33 @@ body
     {
         display: none;
     }
+    
+    .project-block
+    {
+        padding: 10px 20px;
+    }
+    .repos-block
+    {
+        display: block;
+    }
+    .project-buttons
+    {
+        margin-left: 0px;
+    }
+    .star_download_proj_buttons
+    {
+        display: none;
+    }
+    .project-description
+    {
+        padding-bottom: 8px;
+    }
+    h3
+    {
+        margin-top: 10px;
+    }
 }
+
 @media (max-width: 220px)
 {
     #main-header
@@ -379,5 +405,30 @@ body
     .home-page-block:hover .middle-block
     {
         display: none;
+    }
+    
+    .project-block
+    {
+        padding: 10px 20px;
+    }
+    .repos-block
+    {
+        display: block;
+    }
+    .project-buttons
+    {
+        margin-left: 0px;
+    }
+    .star_download_proj_buttons
+    {
+        display: none;
+    }
+    .project-description
+    {
+        padding-bottom: 8px;
+    }
+    h3
+    {
+        margin-top: 10px;
     }
 }

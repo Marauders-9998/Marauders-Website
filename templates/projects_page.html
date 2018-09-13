@@ -4,6 +4,12 @@
 {% extends "public.html" %}
 {% endif %}
 
+{% block topheader_txt %}
+<div id="top-header-txt">
+    Projects
+</div>
+{% endblock %}
+
 {% block headertitle %}
     <div class="header-title">
         <h2>
@@ -54,7 +60,7 @@
                         Issue
                     </a>
                 </div>
-                <div>
+                <div class="star_download_proj_buttons">
                     <a class="github-button"
                        href="https://github.com/{{org}}/{{repo.name}}"
                        data-icon="octicon-star" data-size="large"
