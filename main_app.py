@@ -108,6 +108,7 @@ def showFrontPage():
 @app.route('/', subdomain = "api")
 def apiFrontPage(auth_token = None):
 	if loggedIn() or validAccessToken(auth_token):
+		#Find auth_token if directly logged in
 		updateLimiting(auth_token)
 		homePageJSON = {
 		"api": 
@@ -144,11 +145,11 @@ def apiFrontPage(auth_token = None):
 	return response
 
 def validAccessToken(auth_token):
-	if not auth_token:
+	if auth_token:
 		#Code to check for the validation token
-		return False
-	else:
 		return True
+	else:
+		return False
 
 
 @app.route('/projects/')
@@ -188,11 +189,10 @@ def showProjectsPage():
 @app.route('/projects/<auth_token>', subdomain = "api")
 @app.route('/projects/', subdomain = "api")
 def apiProjectsPage(auth_token = None):
-	if loggedIn() or validAccessToken(auth_token):		
-		updateLimiting(auth_token)
+	if loggedIn() or validAccessToken(auth_token):
 		projectsJSON = {
 
-			"projects": orgReposInfo(github)
+			"projects": orgReposInfo(github, auth_token)
 		}
 		response = make_response(jsonify(projectsJSON), 200)
 	else:
@@ -207,10 +207,6 @@ def apiProjectsPage(auth_token = None):
 
 	response.headers['Server'] = app.config['SERVER_NAME']
 	response.headers['Content-Type'] = 'application/json'
-	#Number of api hits allowed per user per specified time
-	response.headers['X-RateLimit-Limit'] = '60'
-	#Show the allowed number of api hits for the user for the current time interval
-	response.headers['X-RateLimit-Remaining'] = '60' ##in_production
 	return response
 
 
@@ -277,13 +273,14 @@ def orgsAccountInfo(blueprint_session, github_user):
 	return orgs_info_json
 
 
-def orgReposInfo(blueprint_session):
-	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0'}
-	'''repos_info = blueprint_session.get('/orgs/{org}/repos?client_id={}&client_secret={client_secret}'.format(org = organisation,
-		client_id = client_id,
-		client_secret = client_secret),
-	headers = headers)''' ##in_production
-	repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation))
+def orgReposInfo(blueprint_session, auth_token = None):
+	repos_info = None
+	if auth_token:
+		request_url = 'https://api.github.com/orgs/{org}/repos?access_token={token}'.format(org = organisation, token = auth_token)
+		repos_info = requests.get(request_url)
+	else:
+		repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation))
+	print('repos_info.ok', repos_info.ok)
 	if repos_info.ok:
 		repos_info_json = repos_info.json()
 	else:
