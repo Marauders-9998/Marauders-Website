@@ -1,4 +1,7 @@
 # [Marauders-Website](https://github.com/Marauders-9998/Marauders-Website)
+![Python](https://img.shields.io/badge/python-v3.6-blue.svg)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+
 
 ## Deploying Flask App on Heroku
 ```
