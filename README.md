@@ -10,8 +10,8 @@ cd /etc
 nano hosts
 ```
 Now add these names to 127.0.0.1 IP address:<br>
-marauders.com<br>
-api.marauders.com<br>
+> marauders.com<br>
+> api.marauders.com
 
 ### Running the app
 ```
