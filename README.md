@@ -17,6 +17,8 @@ api.marauders.com<br>
 ```
 git clone https://github.com/Marauders-9998/Marauders-Website.git
 cd Marauders-Website
+```
+```
 python3 -m venv venv
 source venv/bin/activate
 pip3 install flask jinja2 certifi chardet gunicorn requests httplib2 simplejson sqlalchemy
