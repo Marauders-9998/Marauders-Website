@@ -3,27 +3,23 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-
-## Deploying Flask App on Heroku
+## Running the Website locally
+### Add names for localhost
 ```
-heroku login
+cd /etc
+nano hosts
+```
+Now add these names to 127.0.0.1 IP address:<br>
+marauders.com<br>
+api.marauders.com<br>
+
+### Running the app
+```
 git clone https://github.com/Marauders-9998/Marauders-Website.git
 cd Marauders-Website
-heroku create <heroku_app_name>
-nano Procfile
-```
-Put this in Procfile and Save
-> web: python3 main_app.py
-```
 python3 -m venv venv
 source venv/bin/activate
 pip3 install flask jinja2 certifi chardet gunicorn requests httplib2 simplejson sqlalchemy
 pip3 install flask_dance flask_login sqlalchemy_utils blinker flask_sqlalchemy flask-restful
-pip3 uninstall pkg-resources==0.0.0
-pip3 freeze > requirements.txt
-git add -A
-git commit -m "Changes"
-git push heroku master
-heroku ps:scale web=1
-heroku open
+python3 main_app.py
 ```
