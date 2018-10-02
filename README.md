@@ -18,10 +18,14 @@ Now add these names to 127.0.0.1 IP address:<br>
 git clone https://github.com/Marauders-9998/Marauders-Website.git
 cd Marauders-Website
 ```
+#### main_app.py
+
+Update the client_id and MARAUDERS_GITHUB_SECRET with your github OAuth App's Client ID and Client Secret respectively.<br><br>
+Include the **--setup** arg when running only for the first time.
 ```
 python3 -m venv venv
 source venv/bin/activate
 pip3 install flask jinja2 certifi chardet gunicorn requests httplib2 simplejson sqlalchemy
 pip3 install flask_dance flask_login sqlalchemy_utils blinker flask_sqlalchemy flask-restful
-python3 main_app.py
+python3 main_app.py [--setup]
 ```
