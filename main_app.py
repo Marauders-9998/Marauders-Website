@@ -35,12 +35,9 @@ allowed_users_ids = [27439964, 31085591]
 ## --------------- Initialising the flask object and registering github blueprint ---------------- ##
 app = Flask(__name__)
 website_url = "marauders.com:5000"
-os.environ['MARAUDERS_LOGIN_DATA'] = 'sqlite:///login_data.db' ##in_production
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
-os.environ['MARAUDERS_GITHUB_SECRET'] = 'a91584ffc8e8be704859046e665fe11dc89c964b' ##in_production
-client_id = '6fbf106b39b23aeeba15' ##in_production
-#client_id = 'GITHUB_APP_CLIENT_ID'
+client_id = os.environ.get('GITHUB_APP_CLIENT_ID')
 client_secret = os.environ.get('MARAUDERS_GITHUB_SECRET')
 github_blueprint = make_github_blueprint(client_id = client_id,
 										client_secret = client_secret)
@@ -75,7 +72,7 @@ def load_user(user_id):
 ## ----------------------------------------------------------------------------------------------- ##
 
 def website_urlmaker(url_got):
-	return url_got.format(website_url=website_url, access_token="{/access_token}")
+	return url_got.format(protocol="http", website_url=website_url, access_token="{/access_token}")
 
 
 def render_page(html_page, **kwargs):
@@ -117,17 +114,17 @@ def apiFrontPage(auth_token = None):
 		homePageJSON = {
 		"api": 
 		{
-			"api_url": website_urlmaker("http://api.{website_url}"),
-			"blogs_url": website_urlmaker("http://api.{website_url}/blogs"),
-			"forum_url": website_urlmaker("http://api.{website_url}/forum"),
-			"projects_url": website_urlmaker("http://api.{website_url}/projects"),
+			"api_url": website_urlmaker("{protocol}://api.{website_url}"),
+			"blogs_url": website_urlmaker("{protocol}://api.{website_url}/blogs"),
+			"forum_url": website_urlmaker("{protocol}://api.{website_url}/forum"),
+			"projects_url": website_urlmaker("{protocol}://api.{website_url}/projects"),
 		},
 		"html":
 		{
-			"html_url": website_urlmaker("http://{website_url}"),
+			"html_url": website_urlmaker("{protocol}://{website_url}"),
 			"blogs_html_url": website_urlmaker("https://marauders9998.blogspot.com"),
-			"forum_html_url": website_urlmaker("http://{website_url}/forum"),
-			"projects_html_url": website_urlmaker("http://{website_url}/projects")
+			"forum_html_url": website_urlmaker("{protocol}://{website_url}/forum"),
+			"projects_html_url": website_urlmaker("{protocol}://{website_url}/projects")
 		}}
 		response = make_response(jsonify(homePageJSON), 200)
 	else:
@@ -135,8 +132,8 @@ def apiFrontPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
-			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
+			"marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
+			"api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -204,8 +201,8 @@ def apiProjectsPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
-			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
+			"marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
+			"api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -230,8 +227,8 @@ def apiBlogsPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
-			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
+			"marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
+			"api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -358,11 +355,10 @@ if __name__ == '__main__':
 			db.create_all()
 			db.session.commit()
 			print("Database tables created")
-	os.environ['MARAUDERS_SECRET_KEY'] = 'super_secret_key' ##in_production
-	os.environ['MARAUDERS_DATABASE_URL'] = 'www.google.com' ##in_production
 	app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
 	app.config['SERVER_NAME'] = website_url
 	app.config['JSON_SORT_KEYS'] = False
-	app.debug = True
+	app.debug = False
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
-	app.run(host = '0.0.0.0', port = 5000)
+	port = int(os.environ.get('PORT', 5000))
+	app.run(host = '0.0.0.0', port=port)
