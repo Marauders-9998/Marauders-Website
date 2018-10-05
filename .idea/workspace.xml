@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="05a66bbc-aa1e-4343-a535-0b383441355e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/main_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/new_blog_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new_blog_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +19,12 @@
     <session id="-1729171657">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -40,9 +46,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
               <caret line="33" column="100" selection-start-line="33" selection-start-column="100" selection-end-line="33" selection-end-column="100" />
-              <folding>
-                <marker date="1536426320398" expanded="true" signature="4816:4840" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -140,8 +143,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25757575" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26136363" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -175,9 +179,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="33" column="100" selection-start-line="33" selection-start-column="100" selection-end-line="33" selection-end-column="100" />
-          <folding>
-            <marker date="1536426320398" expanded="true" signature="4816:4840" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>

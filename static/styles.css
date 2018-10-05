@@ -231,13 +231,15 @@ body
     left: 0;
     z-index: 1000;
     padding: 10px 16px;
-    //background: #24292E;
-    background: url(header_background.jpg);
+    background-color: rgba(36, 41, 46, 0.2);
+    //background: url(header_background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    color: white;
+    color: #24292E;
+    letter-spacing: 1px;
     min-height: 100px;
-    
+    font-size: 250%;
+    font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;

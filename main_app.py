@@ -34,6 +34,7 @@ allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 ## --------------- Initialising the flask object and registering github blueprint ---------------- ##
 app = Flask(__name__)
+website_url = "marauders.com:5000"
 os.environ['MARAUDERS_LOGIN_DATA'] = 'sqlite:///login_data.db' ##in_production
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
@@ -72,6 +73,9 @@ login_manager = LoginManager(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 ## ----------------------------------------------------------------------------------------------- ##
+
+def website_urlmaker(url_got):
+	return url_got.format(website_url=website_url, access_token="{/access_token}")
 
 
 def render_page(html_page, **kwargs):
@@ -113,17 +117,17 @@ def apiFrontPage(auth_token = None):
 		homePageJSON = {
 		"api": 
 		{
-			"api_url": "http://api.marauders.com:5000",
-			"blogs_url": "http://api.marauders.com:5000/blogs",
-			"forum_url": "http://api.marauders.com:5000/forum",
-			"projects_url": "http://api.marauders.com:5000/projects",
+			"api_url": website_urlmaker("http://api.{website_url}"),
+			"blogs_url": website_urlmaker("http://api.{website_url}/blogs"),
+			"forum_url": website_urlmaker("http://api.{website_url}/forum"),
+			"projects_url": website_urlmaker("http://api.{website_url}/projects"),
 		},
 		"html":
 		{
-			"html_url": "http://marauders.com:5000",
-			"blogs_html_url": "https://marauders9998.blogspot.com",
-			"forum_html_url": "http://marauders.com:5000/forum",
-			"projects_html_url": "http://marauders.com:5000/projects"
+			"html_url": website_urlmaker("http://{website_url}"),
+			"blogs_html_url": website_urlmaker("https://marauders9998.blogspot.com"),
+			"forum_html_url": website_urlmaker("http://{website_url}/forum"),
+			"projects_html_url": website_urlmaker("http://{website_url}/projects")
 		}}
 		response = make_response(jsonify(homePageJSON), 200)
 	else:
@@ -131,8 +135,8 @@ def apiFrontPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": "http://marauders.com:5000/github",
-			"api_url": "http://api.marauders.com{/access_token}"
+			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
+			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -200,8 +204,8 @@ def apiProjectsPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": "http://marauders.com:5000/github",
-			"api_url": "http://api.marauders.com{/access_token}"
+			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
+			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -226,8 +230,8 @@ def apiBlogsPage(auth_token = None):
 		"message": "Unauthorized",
 		"access":
 		{
-			"marauders_login_url": "http://marauders.com:5000/github",
-			"api_url": "http://api.marauders.com{/access_token}"
+			"marauders_login_url": website_urlmaker("http://{website_url}/github"),
+			"api_url": website_urlmaker("http://api.{website_url}{access_token}")
 		}}
 		response = make_response(jsonify(UnauthAPI), 401)
 
@@ -301,7 +305,7 @@ def orgReposInfo(blueprint_session, auth_token = None):
 		repos_info = requests.get(request_url)
 	else:
 		repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org = organisation))
-	print('repos_info.ok', repos_info.ok)
+	#print('repos_info.ok', repos_info.ok)
 	if repos_info.ok:
 		repos_info_json = repos_info.json()
 	else:
@@ -357,7 +361,7 @@ if __name__ == '__main__':
 	os.environ['MARAUDERS_SECRET_KEY'] = 'super_secret_key' ##in_production
 	os.environ['MARAUDERS_DATABASE_URL'] = 'www.google.com' ##in_production
 	app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
-	app.config['SERVER_NAME'] = 'marauders.com:5000' ##in_production
+	app.config['SERVER_NAME'] = website_url
 	app.config['JSON_SORT_KEYS'] = False
 	app.debug = True
 	os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' ##in_production
