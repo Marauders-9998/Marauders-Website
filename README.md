@@ -26,9 +26,6 @@ Run the app locally once before deploying on heroku.
 
 ### Running the app locally
 
-#### main_app.py
-Update **website_url** with **marauders.com**<br><br>
-
 Include the **--setup** arg when running only for the first time.
 ```
 cd Marauders-Website
