@@ -25,6 +25,7 @@ Add the environment variables and their corresponding values as specified in Con
 Run the app locally once before deploying on heroku.
 
 ### Running the app locally
+
 #### main_app.py
 Update **website_url** with **marauders.com**<br><br>
 
@@ -41,6 +42,10 @@ python3 main_app.py [--setup]
 Press Ctrl+C to terminate.
 
 ## Deploying the Website on Heroku
+
+#### main_app.py
+Update **website_url** with **marauders9998.herokuapp.com**
+
 ### Create a Heroku App
 Sign up on [Heroku](https://www.heroku.com/) if you haven't got an account.
 ```
