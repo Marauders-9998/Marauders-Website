@@ -5,8 +5,8 @@
 
 ## Make a Github OAuth App
 Register you new [Github OAuth App](https://github.com/settings/applications/new)
-- Homepage Url: **http://marauders.com:5000/**
-- Authorization Callback URL: **http://marauders.com:5000/github_login/github/authorized**
+- **Homepage Url**: http://marauders.com:5000/
+- **Authorization Callback URL**: http://marauders.com:5000/github_login/github/authorized
 
 ## Fork and Clone
 Fork this repository.<br>
