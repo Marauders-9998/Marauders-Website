@@ -3,6 +3,11 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+## Make a Github OAuth App
+Register you new [Github OAuth App](https://github.com/settings/applications/new)
+- Homepage Url: **http://marauders.com:5000/**
+- Authorization Callback URL: **http://marauders.com:5000/github_login/github/authorized**
+
 ## Fork and Clone
 Fork this repository.<br>
 Clone your forked repository.
@@ -57,6 +62,10 @@ heroku login
 cd Marauders-Website
 heroku create <heroku_app_name>
 ```
+## Update Github OAuth App
+Go to your github app settings.<br>
+Update Homepage and Callback URLs.
+
 ### Create requirements file for the server
 ```
 pip3 freeze > requirements.txt
