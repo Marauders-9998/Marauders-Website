@@ -21,7 +21,7 @@ Now add these names to 127.0.0.1 IP address:<br>
 > api.marauders.com
 
 ### Add some Environment Variables
-Add the environment variables and their corresponding values as specified in Config_Variables file.<br><br>
+Add the environment variables and their corresponding values as specified in **Config_Variables** file.<br><br>
 Run the app locally once before deploying on heroku.
 
 ### Running the app locally
@@ -44,7 +44,14 @@ Press Ctrl+C to terminate.
 ## Deploying the Website on Heroku
 
 #### main_app.py
-Update **website_url** with **marauders9998.herokuapp.com**
+Update **website_url** with **<your_heroku_app_name>.herokuapp.com**
+
+### Add environment variables to your server
+- Go to your [Heroku Dashboard](https://dashboard.heroku.com/apps)
+- Select your Heroku App.
+- Under Settings tab, click on **Reveal Config Vars**
+- Now add the environment variables as specified in **Config_Variables** file.
+
 
 ### Create a Heroku App
 Sign up on [Heroku](https://www.heroku.com/) if you haven't got an account.
