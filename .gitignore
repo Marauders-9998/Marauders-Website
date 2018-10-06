@@ -112,5 +112,5 @@ Vagrantfile
 .idea
 .idea/
 
-login_data.db
-Procfile
+# Heroku Stuff
+requirements.txt
