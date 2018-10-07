@@ -3,19 +3,20 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-## Make a Github OAuth App
-Register you new [Github OAuth App](https://github.com/settings/applications/new)
-- **Homepage Url**: http://marauders.com:5000/
-- **Authorization Callback URL**: http://marauders.com:5000/github_login/github/authorized
+## Running the Website locally
 
-## Fork and Clone
+### Fork and Clone
 Fork this repository.<br>
 Clone your forked repository.
 ```
 git clone https://github.com/<user_name>/Marauders-Website.git
 ```
 
-## Running the Website locally
+### Make a Github OAuth App
+Register you new [Github OAuth App](https://github.com/settings/applications/new)
+- **Homepage Url**: http://marauders.com:5000/
+- **Authorization Callback URL**: http://marauders.com:5000/github_login/github/authorized
+
 ### Add names for localhost
 ```
 cd /etc
