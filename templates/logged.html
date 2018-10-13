@@ -4,43 +4,36 @@
 <div id="top-bar-right">
     <div id="user-image-div">
         <div class="dropdown usr-dropdown">
-            <button id="usr-btn"
-                    class="btn btn-default dropdown-toggle"
-                    type="button" id="menu1" data-toggle="dropdown">
+            <button id="usr-btn" class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
                 <img src="{{usr_img}}" id="usr-img" style="width:32px;height:32px;">
                 <span class="caret"></span>
             </button>
-            <ul id="user-dropdown-menu"
-                class="dropdown-menu dropdown-menu-right"
-                role="menu" aria-labelledby="menu1">
-                   
+            <ul id="user-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+
                 <li role="presentation">
-                    <a role="menuitem" tabindex="-1"
-                       href="{{usr_url}}">
+                    <a role="menuitem" tabindex="-1" href="{{usr_url}}">
                         Signed in as<br>
                         <b>{{usr_name}}</b>
                     </a>
                 </li>
-                
+
                 <li role="presentation" class="divider"></li>
-                
+
                 {% if orgs_info %}
-                    
+
                 {% for org in orgs_info %}
                 <li role="presentation">
                     <a role="menuitem" tabindex="-1" href="https://github.com/{{org.login}}">
-                    <img src="{{org.avatar_url}}"
-                         class="org-img"
-                         style="width: 15px;
+                        <img src="{{org.avatar_url}}" class="org-img" style="width: 15px;
                                 height: 15px">
-                    {{org.login}}
+                        {{org.login}}
                     </a>
                 </li>
                 {% endfor %}
-                    
+
                 <li role="presentation" class="divider"></li>
-                {% endif %}                        
-                    
+                {% endif %}
+
                 <li role="presentation">
                     <a role="menuitem" tabindex="-1" href="{{usr_url}}/?tab=repositories">
                         My Repos
@@ -53,9 +46,9 @@
                     </a>
                 </li>
                 {% endif %}
-                        
+
                 <li role="presentation" class="divider"></li>
-                        
+
                 <li role="presentation">
                     <a role="menuitem" tabindex="-1" href="/github_logout">Logout</a>
                 </li>

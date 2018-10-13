@@ -1,110 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-         <link rel="icon" href="{{ url_for('static', filename='favicon_32.png')}}"
-               type="image/gif">
-        
-        <link href="{{ url_for('static', filename='assets/css/bootstrap.css')}}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='assets/css/font-awesome.css')}}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='bootstrap-social.css')}}" rel="stylesheet">
-        
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css')}}">
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-    </head>
-    
-    <body>
-        <div id="top-bar">
-            <div id="inner-top-bar">
-                <div id="top-bar-left">
-                    <div id="marauders-logo">
-                        <a href="/">
-                            <img src="{{ url_for('static', filename='favicon_32.png')}}"
-                                 id="org-logo"
-                                 style="width: 32px;
+
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='favicon_32.png')}}" type="image/gif">
+
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap-social.css')}}" rel="stylesheet">
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<!-- body begins -->
+
+<body>
+    <div id="top-bar">
+        <div id="inner-top-bar">
+            <div id="top-bar-left">
+                <div id="marauders-logo">
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='favicon_32.png')}}" id="org-logo" style="width: 32px;
                                         height: 32px">
-                        </a>
-                    </div>
+                    </a>
                 </div>
-                <div id="top-bar-div">
-                    {% block topheader_txt %}
-                    {% endblock %}
-                </div>
-                {% block topbar_right %}
+            </div>
+            <div id="top-bar-div">
+                {% block topheader_txt %}
                 {% endblock %}
             </div>
+            {% block topbar_right %}
+            {% endblock %}
         </div>
-        <div class="website-header" id="main-header">
-            <div class="header-content">
-                {% block headertitle %}
-                {% endblock %}
-            </div>
+    </div>
+    <div class="website-header" id="main-header">
+        <div class="header-content">
+            {% block headertitle %}
+            {% endblock %}
         </div>
-		<div class="container">
-			{% block content %}
-			{% endblock %}
-		</div>
-        <script>
-            window.onscroll = function() {myFunction()};
-            
-            var header = document.getElementById("main-header");
-            var sticky = header.offsetTop;
-            
-            function myFunction()
-            {
-                if (window.pageYOffset > sticky)
-                {   header.classList.add("sticky");
-                }
-                else
-                {   header.classList.remove("sticky");
-                }
+    </div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script>
+        window.onscroll = function () {
+            myFunction()
+        };
+
+        var header = document.getElementById("main-header");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
             }
-        </script>
-    </body>
-    
-    <footer id="footer" class="footer" name="footer">
-        <div id="footer-div">
-            <div class="widget-content">
-                <div>
-                    <a href="https://plus.google.com/116154490900675422516"
-                       target="_blank">
-                        <img src="{{ url_for('static', filename='google-logo.png')}}"
-                             alt="Connect on Google"
-                             title="Connect on Google"
-                             style="width: 32px;
+        }
+    </script>
+</body>
+
+<footer id="footer" class="footer" name="footer">
+    <div id="footer-div">
+        <div class="widget-content">
+            <div>
+                <a href="https://plus.google.com/116154490900675422516" target="_blank">
+                    <img src="{{ url_for('static', filename='google-logo.png')}}" alt="Connect on Google" title="Connect on Google"
+                        style="width: 32px;
                                     height: 32px;">
-                    </a>
-                    <a href="https://github.com/Marauders-9998"
-                       target="_blank">
-                        <img src="{{ url_for('static', filename='github-logo-black.png')}}"
-                             alt="Connect on Github"
-                             title="Connect on Github"
-                             style="width: 32px;
+                </a>
+                <a href="https://github.com/Marauders-9998" target="_blank">
+                    <img src="{{ url_for('static', filename='github-logo-black.png')}}" alt="Connect on Github" title="Connect on Github"
+                        style="width: 32px;
                                     height: 32px;">
-                    </a>
-                    <a href="https://fb.me/marauders9998"
-                       target="_blank">
-                        <img src="{{ url_for('static', filename='facebook-logo.png')}}"
-                             alt="Connect on Facebook"
-                             title="Connect on Facebook"
-                             style="width: 32px;
+                </a>
+                <a href="https://fb.me/marauders9998" target="_blank">
+                    <img src="{{ url_for('static', filename='facebook-logo.png')}}" alt="Connect on Facebook" title="Connect on Facebook"
+                        style="width: 32px;
                                     height: 32px;">
-                    </a>
-                </div>
-                
-                <div id="flask-powered-button">
-                    <a href="http://flask.pocoo.org/"
-                       target="_blank">
-                        <img src="http://flask.pocoo.org/static/badges/powered-by-flask-s.png"
-                             border="0"
-                             alt="powered by Flask"
-                             title="powered by Flask">
-                    </a>
-                </div>
+                </a>
             </div>
-        </div>        
-    </footer>
+
+            <div id="flask-powered-button">
+                <a href="http://flask.pocoo.org/" target="_blank">
+                    <img src="http://flask.pocoo.org/static/badges/powered-by-flask-s.png" border="0" alt="powered by Flask"
+                        title="powered by Flask">
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 </html>
