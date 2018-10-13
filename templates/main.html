@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- The head section is where all scripts, css files and other imports are made -->
 	<head>
          <link rel="icon" href="{{ url_for('static', filename='favicon_32.png')}}"
                type="image/gif">
@@ -16,11 +17,14 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     
+    <!-- The body section is that contains the elements that are displayed -->
     <body>
+        <!-- Div containing the top bar -->
         <div id="top-bar">
             <div id="inner-top-bar">
                 <div id="top-bar-left">
                     <div id="marauders-logo">
+                        <!-- Link -->
                         <a href="/">
                             <img src="{{ url_for('static', filename='favicon_32.png')}}"
                                  id="org-logo"
@@ -47,28 +51,34 @@
 			{% block content %}
 			{% endblock %}
 		</div>
+        <!-- Javascript function -->
         <script>
+            //exectutes myFunction() when the page is scrolled
             window.onscroll = function() {myFunction()};
             
+            //assigns the element with the "main-header" id to the header variable
             var header = document.getElementById("main-header");
+            //assigns to the variable sticky the offsetTop of the header
             var sticky = header.offsetTop;
             
-            function myFunction()
-            {
-                if (window.pageYOffset > sticky)
-                {   header.classList.add("sticky");
-                }
-                else
-                {   header.classList.remove("sticky");
+            function myFunction(){
+                //if the pageYOffset of the window is greater then the values of sticky it executes
+                //the first option, else, it executes the second command
+                if (window.pageYOffset > sticky){
+                    header.classList.add("sticky");
+                }else{
+                    header.classList.remove("sticky");
                 }
             }
         </script>
     </body>
     
+    <!-- The footer section contains all elements that are displayed ont the footer of the page -->
     <footer id="footer" class="footer" name="footer">
         <div id="footer-div">
             <div class="widget-content">
                 <div>
+                    <!-- Link -->
                     <a href="https://plus.google.com/116154490900675422516"
                        target="_blank">
                         <img src="{{ url_for('static', filename='google-logo.png')}}"
@@ -77,6 +87,7 @@
                              style="width: 32px;
                                     height: 32px;">
                     </a>
+                    <!-- Link -->
                     <a href="https://github.com/Marauders-9998"
                        target="_blank">
                         <img src="{{ url_for('static', filename='github-logo-black.png')}}"
@@ -85,6 +96,7 @@
                              style="width: 32px;
                                     height: 32px;">
                     </a>
+                    <!-- Link -->
                     <a href="https://fb.me/marauders9998"
                        target="_blank">
                         <img src="{{ url_for('static', filename='facebook-logo.png')}}"
@@ -96,6 +108,7 @@
                 </div>
                 
                 <div id="flask-powered-button">
+                    <!-- Link -->
                     <a href="http://flask.pocoo.org/"
                        target="_blank">
                         <img src="http://flask.pocoo.org/static/badges/powered-by-flask-s.png"
