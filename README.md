@@ -41,7 +41,6 @@ pip3 install flask_dance flask_login sqlalchemy_utils blinker flask_sqlalchemy f
 pip3 uninstall pkg-resources==0.0.0
 python3 main_app.py [--setup]
 ```
-### To Terminate the running program.
-~~~
-Press Ctrl+C to terminate.
-~~~
+### To Terminate the server
+
+Press Ctrl+C
