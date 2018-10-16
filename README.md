@@ -36,9 +36,7 @@ Include the **--setup** arg when running only for the first time.
 cd Marauders-Website
 python3 -m venv venv
 source venv/bin/activate
-pip3 install flask jinja2 certifi chardet gunicorn requests httplib2 simplejson sqlalchemy
-pip3 install flask_dance flask_login sqlalchemy_utils blinker flask_sqlalchemy flask-restful
-pip3 uninstall pkg-resources==0.0.0
+pip3 install requirements.txt
 python3 main_app.py [--setup]
 ```
 ### To Terminate the server
