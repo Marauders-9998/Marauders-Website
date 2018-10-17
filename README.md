@@ -36,7 +36,7 @@ Include the **--setup** arg when running only for the first time.
 cd Marauders-Website
 python3 -m venv venv
 source venv/bin/activate
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 pip3 uninstall pkg-resources==0.0.0
 python3 main_app.py [--setup]
 ```
