@@ -111,6 +111,3 @@ Vagrantfile
 # Pycharm Stuff
 .idea
 .idea/
-
-# Heroku Stuff
-requirements.txt
