@@ -37,6 +37,7 @@ cd Marauders-Website
 python3 -m venv venv
 source venv/bin/activate
 pip3 install requirements.txt
+pip3 uninstall pkg-resources==0.0.0
 python3 main_app.py [--setup]
 ```
 ### To Terminate the server
