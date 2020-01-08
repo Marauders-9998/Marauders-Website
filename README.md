@@ -1,7 +1,8 @@
 # [Marauders-Website](https://github.com/Marauders-9998/Marauders-Website)
-![Python](https://img.shields.io/badge/python-v3.6-blue.svg)
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
+
+
+[![Open Issues](https://img.shields.io/github/issues/Marauders-9998/Marauders-Website?style=for-the-badge&logo=github)](https://github.com/Marauders-9998/Marauders-Website/issues)  [![Forks](https://img.shields.io/github/forks/Marauders-9998/Marauders-Website?style=for-the-badge&logo=github)](https://github.com/Marauders-9998/Marauders-Website/network/members)  [![Stars](https://img.shields.io/github/stars/Marauders-9998/Marauders-Website?style=for-the-badge&logo=reverbnation)](https://github.com/Marauders-9998/Marauders-Website/stargazers)   ![Made with Flask](https://img.shields.io/badge/Made%20with-Flask-blueviolet?style=for-the-badge&logo=flask)   [![Slack](https://img.shields.io/badge/Slack-Chat-informational?style=for-the-badge&logo=slack)](https://join.slack.com/t/marauders9998/shared_invite/enQtODkwNTgxMTAxNTIwLTJhOWFhNzQwYjU3MTUwN2Y5NmZmN2VjMTc4NDA1MGRjZmIzNWEzZDU0ODZjNjE3NjkzNzk4ZmI1ZGFiOGE2NzQ)
+
 
 ## Running the Website locally
 
