@@ -34,7 +34,7 @@ allowed_users_ids = [27439964, 31085591]
 ## ----------------------------------------------------------------------------------------------- ##
 ## --------------- Initialising the flask object and registering github blueprint ---------------- ##
 app = Flask(__name__)
-website_url = "marauders.com:5000"
+website_url = "marauders9998.herokuapp.com"
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
 client_id = os.environ.get('GITHUB_APP_CLIENT_ID')
