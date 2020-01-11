@@ -16,10 +16,10 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for, f
 # ----------------------------------------------------------------------------------------------- #
 # -------------------- Importing modules for database and Github OAuth -------------------------- #
 from flask_dance.contrib.github import make_github_blueprint, github
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, current_user, LoginManager, login_required, login_user, logout_user
 from flask_dance.consumer.backend.sqla import OAuthConsumerMixin, SQLAlchemyBackend
 from flask_dance.consumer import oauth_authorized
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin, current_user, LoginManager, login_required, login_user, logout_user
 from sqlalchemy.orm.exc import NoResultFound
 
 # ----------------------------------------------------------------------------------------------- #
