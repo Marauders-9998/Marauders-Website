@@ -172,14 +172,9 @@ def showProjectsPage():
     repositories = orgReposInfo(github)
     if repositories:
         for repository in repositories:
-            repo = {}
-            repo['id'] = repository['id']
-            repo['name'] = repository['name']
-            repo['url'] = repository['html_url']
-            repo['issues'] = repository['open_issues_count']
-            repo['forks'] = repository['forks_count']
-            repo['desc'] = repository['description']
-            repo['lang'] = repository['language']
+            repo = {'id': repository['id'], 'name': repository['name'], 'url': repository['html_url'],
+                    'issues': repository['open_issues_count'], 'forks': repository['forks_count'],
+                    'desc': repository['description'], 'lang': repository['language']}
             try:
                 repo['lang_color'] = lang_info[repo['lang']]['color']
             except:
@@ -279,12 +274,7 @@ def maraudersLoggedIn():
         if account_info is not None:
             if account_info['id'] in ALLOWED_USERS_IDs:
                 return True
-            else:
-                return False
-        else:
-            return False
-    else:
-        return False
+    return False
 
 
 def accountInfo(blueprint_session):
