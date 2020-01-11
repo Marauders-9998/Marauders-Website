@@ -27,22 +27,22 @@ from sqlalchemy.orm.exc import NoResultFound
 
 # ----------------------------------------------------------------------------------------------- #
 # ----- Organisation to get github project from and github ids allowed for creating a blog ------ #
-organisation = 'Marauders-9998'
-allowed_users_ids = [27439964, 31085591]
+ORGANISATION = 'Marauders-9998'
+ALLOWED_USERS_IDs = [27439964, 31085591]
 # ----------------------------------------------------------------------------------------------- #
 
 
 # ----------------------------------------------------------------------------------------------- #
 # --------------- Initialising the flask object and registering github blueprint ---------------- #
 app = Flask(__name__)
-website_url = "marauders.com:5000"
+WEBSITE_URL = "marauders.com:5000"
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
-client_id = os.environ.get('GITHUB_APP_CLIENT_ID')
-client_secret = os.environ.get('MARAUDERS_GITHUB_SECRET')
-github_blueprint = make_github_blueprint(client_id=client_id,
-                                         client_secret=client_secret)
-app.register_blueprint(github_blueprint, url_prefix='/github_login')
+CLIENT_ID = os.environ.get('GITHUB_APP_CLIENT_ID')
+CLIENT_SECRET = os.environ.get('MARAUDERS_GITHUB_SECRET')
+GITHUB_BLUEPRINT = make_github_blueprint(client_id=CLIENT_ID,
+                                         client_secret=CLIENT_SECRET)
+app.register_blueprint(GITHUB_BLUEPRINT, url_prefix='/github_login')
 # ----------------------------------------------------------------------------------------------- #
 
 
@@ -61,8 +61,8 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user = db.relationship(User)
 
 
-github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user, user_required=False)  ##in_production
-# github_blueprint.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user)
+GITHUB_BLUEPRINT.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user, user_required=False)  ##in_production
+# GITHUB_BLUEPRINT.backend = SQLAlchemyBackend(OAuth, db.session, user=current_user)
 # ----------------------------------------------------------------------------------------------- #
 
 
@@ -79,7 +79,7 @@ def load_user(user_id):
 # ----------------------------------------------------------------------------------------------- #
 
 def website_urlmaker(url_got):
-    return url_got.format(protocol="http", website_url=website_url, access_token="{/access_token}")
+    return url_got.format(protocol="http", website_url=WEBSITE_URL, access_token="{/access_token}")
 
 
 def render_page(html_page, **kwargs):
@@ -101,7 +101,7 @@ def render_page(html_page, **kwargs):
     else:
         kwargs['userLogged'] = False
 
-    return render_template(html_page, org=organisation, **kwargs)
+    return render_template(html_page, org=ORGANISATION, **kwargs)
 
 
 def updateLimiting(auth_token):
@@ -124,17 +124,17 @@ def apiFrontPage(auth_token=None):
         homePageJSON = {
             "api":
                 {
-                    "api_url": website_urlmaker("{protocol}://api.{website_url}"),
-                    "blogs_url": website_urlmaker("{protocol}://api.{website_url}/blogs"),
-                    "forum_url": website_urlmaker("{protocol}://api.{website_url}/forum"),
-                    "projects_url": website_urlmaker("{protocol}://api.{website_url}/projects"),
+                    "api_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}"),
+                    "blogs_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}/blogs"),
+                    "forum_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}/forum"),
+                    "projects_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}/projects"),
                 },
             "html":
                 {
-                    "html_url": website_urlmaker("{protocol}://{website_url}"),
+                    "html_url": website_urlmaker("{protocol}://{WEBSITE_URL}"),
                     "blogs_html_url": website_urlmaker("https://marauders9998.blogspot.com"),
-                    "forum_html_url": website_urlmaker("{protocol}://{website_url}/forum"),
-                    "projects_html_url": website_urlmaker("{protocol}://{website_url}/projects")
+                    "forum_html_url": website_urlmaker("{protocol}://{WEBSITE_URL}/forum"),
+                    "projects_html_url": website_urlmaker("{protocol}://{WEBSITE_URL}/projects")
                 }}
         response = make_response(jsonify(homePageJSON), 200)
     else:
@@ -142,8 +142,8 @@ def apiFrontPage(auth_token=None):
             "message": "Unauthorized",
             "access":
                 {
-                    "marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
-                    "api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
+                    "marauders_login_url": website_urlmaker("{protocol}://{WEBSITE_URL}/github"),
+                    "api_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}{access_token}")
                 }}
         response = make_response(jsonify(UnauthAPI), 401)
 
@@ -210,8 +210,8 @@ def apiProjectsPage(auth_token=None):
             "message": "Unauthorized",
             "access":
                 {
-                    "marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
-                    "api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
+                    "marauders_login_url": website_urlmaker("{protocol}://{WEBSITE_URL}/github"),
+                    "api_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}{access_token}")
                 }}
         response = make_response(jsonify(UnauthAPI), 401)
 
@@ -237,8 +237,8 @@ def apiBlogsPage(auth_token=None):
             "message": "Unauthorized",
             "access":
                 {
-                    "marauders_login_url": website_urlmaker("{protocol}://{website_url}/github"),
-                    "api_url": website_urlmaker("{protocol}://api.{website_url}{access_token}")
+                    "marauders_login_url": website_urlmaker("{protocol}://{WEBSITE_URL}/github"),
+                    "api_url": website_urlmaker("{protocol}://api.{WEBSITE_URL}{access_token}")
                 }}
         response = make_response(jsonify(UnauthAPI), 401)
 
@@ -277,7 +277,7 @@ def maraudersLoggedIn():
     if loggedIn():
         account_info = accountInfo(github)
         if account_info is not None:
-            if account_info['id'] in allowed_users_ids:
+            if account_info['id'] in ALLOWED_USERS_IDs:
                 return True
             else:
                 return False
@@ -308,11 +308,11 @@ def orgsAccountInfo(blueprint_session, github_user):
 def orgReposInfo(blueprint_session, auth_token=None):
     repos_info = None
     if auth_token:
-        request_url = 'https://api.github.com/orgs/{org}/repos?access_token={token}'.format(org=organisation,
+        request_url = 'https://api.github.com/orgs/{org}/repos?access_token={token}'.format(org=ORGANISATION,
                                                                                             token=auth_token)
         repos_info = requests.get(request_url)
     else:
-        repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org=organisation))
+        repos_info = blueprint_session.get('/orgs/{org}/repos'.format(org=ORGANISATION))
     # print('repos_info.ok', repos_info.ok)
     if repos_info.ok:
         repos_info_json = repos_info.json()
@@ -321,7 +321,7 @@ def orgReposInfo(blueprint_session, auth_token=None):
     return repos_info_json
 
 
-@oauth_authorized.connect_via(github_blueprint)  ##Signal sent on log in
+@oauth_authorized.connect_via(GITHUB_BLUEPRINT)  ##Signal sent on log in
 def github_logged_in(blueprint, token):
     account_info = accountInfo(blueprint.session)
 
@@ -369,7 +369,7 @@ if __name__ == '__main__':
             db.session.commit()
             print("Database tables created")
     app.secret_key = os.environ.get('MARAUDERS_SECRET_KEY')
-    app.config['SERVER_NAME'] = website_url
+    app.config['SERVER_NAME'] = WEBSITE_URL
     app.config['JSON_SORT_KEYS'] = False
     app.debug = False
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'  ##in_production
