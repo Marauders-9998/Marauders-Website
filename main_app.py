@@ -35,7 +35,7 @@ ALLOWED_USERS_IDs = [27439964, 31085591]
 # ----------------------------------------------------------------------------------------------- #
 # --------------- Initialising the flask object and registering github blueprint ---------------- #
 app = Flask(__name__)
-WEBSITE_URL = "marauders.com:5000"
+WEBSITE_URL = os.environ.get('WEBSITE_URL ')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MARAUDERS_LOGIN_DATA')
 
 CLIENT_ID = os.environ.get('GITHUB_APP_CLIENT_ID')
