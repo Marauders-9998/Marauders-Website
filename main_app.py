@@ -79,7 +79,7 @@ def load_user(user_id):
 # ----------------------------------------------------------------------------------------------- #
 
 def website_urlmaker(url_got):
-    return url_got.format(protocol="http", website_url=WEBSITE_URL, access_token="{/access_token}")
+    return url_got.format(protocol="http", WEBSITE_URL=WEBSITE_URL, access_token="{/access_token}")
 
 
 def render_page(html_page, **kwargs):
@@ -115,8 +115,8 @@ def showFrontPage():
     return render_page('front_page.html')
 
 
-@app.route('/<auth_token>', subdomain="api")
-@app.route('/', subdomain="api")
+@app.route('/api/<auth_token>')
+@app.route('/api/')
 def apiFrontPage(auth_token=None):
     if loggedIn() or validAccessToken(auth_token):
         # Find auth_token if directly logged in
