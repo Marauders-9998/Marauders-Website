@@ -111,3 +111,5 @@ Vagrantfile
 # Pycharm Stuff
 .idea
 .idea/
+
+login_data.db
